@@ -7,7 +7,7 @@
 	
 	public class Document extends MovieClip
 	{
-		private var _overworld:Overworld;
+		private var _overworld:GameScreens;
 		private var _overlay:Overlay;
 		
 		private var _player:Player;
@@ -33,7 +33,7 @@
 		
 		private function initOverworld():void
 		{
-			_overworld = new Overworld(this);
+			_overworld = new GameScreens(this);
 			addChild(_overworld);
 		}
 	}

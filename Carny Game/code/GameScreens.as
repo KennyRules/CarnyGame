@@ -1,9 +1,6 @@
 ﻿package code 
 {
 	import code.graphics.GameButton;
-	import code.graphics.RoomButton;
-	import code.graphics.StoreButton;
-	import code.graphics.TownButton;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
@@ -18,16 +15,11 @@
 	 * ...
 	 * @author Drew Diamantoukos
 	 */
-	public class Overworld extends MovieClip 
+	public class GameScreens extends MovieClip 
 	{
 		private var _doc:Document;
 		private var _gameTextBox:GameTextBox;
 		private var _gameDialogBox:GameDialogBox;
-		
-		private var _gameBtn:GameButton;
-		private var _roomBtn:RoomButton;
-		private var _townBtn:TownButton;
-		private var _storeBtn:StoreButton;
 		
 		private var _overworldXML:XMLList;
 		private var _currentXML:XMLList;
@@ -35,62 +27,32 @@
 		private var _currentIndex:int = 0;
 
 		private var _pathRoom:int = 1;
-		private var _pathTown:int = 1;
-		private var _pathStore:int = 1;
 		
-		private var _isAllowedToRoom:Boolean = true;
-		private var _isEricEnabled:Boolean = false;
-		
-		private var _itemXML:XMLList;
-		private var _itemArray:Array = new Array();
-		
-		public function Overworld(aDoc:Document) 
+		public function GameScreens(aDoc:Document) 
 		{
 			_doc = aDoc;
+			changeLocation("Main Menu");
+			btnStartGame.addEventListener(MouseEvent.CLICK, onMouseClick);
 			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("OverworldText.xml"));
 			textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
-			
-			initNavButtons();
 		}
 		
-		private function initNavButtons():void
+		private function onMouseClick(e:MouseEvent)
 		{
-			_roomBtn = new RoomButton();
-			_roomBtn.alpha = 0;
-			_roomBtn.y = 25;
-			addChildAt(_roomBtn, this.numChildren);
-			
-			_storeBtn = new StoreButton();
-			_storeBtn.alpha = 0;
-			_storeBtn.y = 25;
-			_storeBtn.x = 700;
-			addChildAt(_storeBtn, this.numChildren);
-			
-			_townBtn = new TownButton();
-			_townBtn.alpha = 0;
-			_townBtn.y = 25;
-			_townBtn.x = 550;
-			addChildAt(_townBtn, this.numChildren);
-			
-			_gameBtn = new GameButton();
-			_gameBtn.alpha = 0;
-			_gameBtn.y = 25;
-			_gameBtn.x = 125;
-			addChildAt(_gameBtn, this.numChildren);
+			// Instance name of button.
+			switch (e.currentTarget.name)
+			{
+				case "btnStartGame":
+					changeLocation("World Map");
+					break;
+			}
 		}
 		
 		private function onTextLoadComplete(e:Event):void 
 		{
 			_overworldXML = new XMLList(e.target.data);
-			changeLocation("Room");
-			_isAllowedToRoom = false;
+			
 		}
-		
-		private function onItemLoadComplete(e:Event):void
-		{
-			_itemXML = new XMLList(e.target.data);
-		}
-		
 		
 		private function changeLocation(newLocation:String):void
 		{
@@ -100,8 +62,9 @@
 			{
 				
 			}
-			_currentSection = newLocation;
-			loadXmlSection();
+			
+			//_currentSection = newLocation;
+			//loadXmlSection();
 		}
 
 		// Loads a new section of the XML to display.
@@ -117,36 +80,7 @@
 					{
 						case "Room":
 							if (_pathRoom.toString() == xmlPiece.@path)
-							{
 								_currentXML = XMLList(xmlPiece);
-							}
-							break;
-						case "Town":
-							if (_pathTown.toString() == xmlPiece.@path)
-							{
-								_currentXML = XMLList(xmlPiece);
-							}
-							break;
-						case "Store":
-							trace(_pathStore);
-							if (_pathStore.toString() == xmlPiece.@path)
-							{
-								if (_overworldXML.child("Section").(@id == _currentSection).(@path == _pathStore.toString()).length() >= 2)
-								{
-									if (_isEricEnabled == true)
-									{
-										_currentXML = XMLList(_overworldXML.child("Section").(@id == _currentSection)[0]);
-									}
-									else
-									{
-										_currentXML = XMLList(_overworldXML.child("Section").(@id == _currentSection)[1]);
-									}
-								}
-								else
-								{
-									_currentXML = XMLList(xmlPiece);
-								}
-							}
 							break;
 					}
 				}
@@ -254,15 +188,7 @@
 			{
 				switch ((_currentXML[e.dialogSelected].@flag).toString())
 				{
-					case "Eric":
-						if (e.dialogSelected == 0)
-							_isEricEnabled = true;
-						else
-							_isEricEnabled = false;
-						break;
-					default:
-						trace("Undefined Flag");
-						break;
+					
 				}
 			}
 			_currentIndex = 0;

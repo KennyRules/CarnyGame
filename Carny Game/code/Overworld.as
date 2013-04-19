@@ -1,9 +1,6 @@
 ﻿package code 
 {
 	import code.graphics.GameButton;
-	import code.graphics.RoomButton;
-	import code.graphics.StoreButton;
-	import code.graphics.TownButton;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
@@ -18,65 +15,22 @@
 	 * ...
 	 * @author Drew Diamantoukos
 	 */
-	public class Overworld extends MovieClip 
+	public class GameScreens extends MovieClip 
 	{
 		private var _doc:Document;
 		private var _gameTextBox:GameTextBox;
 		private var _gameDialogBox:GameDialogBox;
-		
-		private var _gameBtn:GameButton;
-		private var _roomBtn:RoomButton;
-		private var _townBtn:TownButton;
-		private var _storeBtn:StoreButton;
 		
 		private var _overworldXML:XMLList;
 		private var _currentXML:XMLList;
 		private var _currentSection:String = "Room";
 		private var _currentIndex:int = 0;
 
-		private var _pathRoom:int = 1;
-		private var _pathTown:int = 1;
-		private var _pathStore:int = 1;
-		
-		private var _isAllowedToRoom:Boolean = true;
-		private var _isEricEnabled:Boolean = false;
-		
-		private var _itemXML:XMLList;
-		private var _itemArray:Array = new Array();
-		
-		public function Overworld(aDoc:Document) 
+		public function GameScreens(aDoc:Document) 
 		{
 			_doc = aDoc;
 			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("OverworldText.xml"));
 			textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
-			
-			initNavButtons();
-		}
-		
-		private function initNavButtons():void
-		{
-			_roomBtn = new RoomButton();
-			_roomBtn.alpha = 0;
-			_roomBtn.y = 25;
-			addChildAt(_roomBtn, this.numChildren);
-			
-			_storeBtn = new StoreButton();
-			_storeBtn.alpha = 0;
-			_storeBtn.y = 25;
-			_storeBtn.x = 700;
-			addChildAt(_storeBtn, this.numChildren);
-			
-			_townBtn = new TownButton();
-			_townBtn.alpha = 0;
-			_townBtn.y = 25;
-			_townBtn.x = 550;
-			addChildAt(_townBtn, this.numChildren);
-			
-			_gameBtn = new GameButton();
-			_gameBtn.alpha = 0;
-			_gameBtn.y = 25;
-			_gameBtn.x = 125;
-			addChildAt(_gameBtn, this.numChildren);
 		}
 		
 		private function onTextLoadComplete(e:Event):void 
@@ -86,12 +40,6 @@
 			_isAllowedToRoom = false;
 		}
 		
-		private function onItemLoadComplete(e:Event):void
-		{
-			_itemXML = new XMLList(e.target.data);
-		}
-		
-		
 		private function changeLocation(newLocation:String):void
 		{
 			this.gotoAndStop(newLocation);
@@ -100,6 +48,7 @@
 			{
 				
 			}
+			
 			_currentSection = newLocation;
 			loadXmlSection();
 		}
@@ -254,15 +203,7 @@
 			{
 				switch ((_currentXML[e.dialogSelected].@flag).toString())
 				{
-					case "Eric":
-						if (e.dialogSelected == 0)
-							_isEricEnabled = true;
-						else
-							_isEricEnabled = false;
-						break;
-					default:
-						trace("Undefined Flag");
-						break;
+					
 				}
 			}
 			_currentIndex = 0;
