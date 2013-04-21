@@ -1,6 +1,6 @@
 ﻿package code 
 {
-	import code.graphics.GameButton;
+	import code.Town;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
@@ -10,7 +10,8 @@
 	import flash.events.MouseEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-
+	import flash.utils.getQualifiedClassName;
+	
 	/**
 	 * ...
 	 * @author Drew Diamantoukos
@@ -28,9 +29,12 @@
 
 		private var _pathRoom:int = 1;
 		
+		private var towns:Array;
+		
 		public function GameScreens(aDoc:Document) 
 		{
 			_doc = aDoc;
+			towns = new Array();
 			changeLocation("Main Menu");
 			btnStartGame.addEventListener(MouseEvent.CLICK, onMouseClick);
 			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("OverworldText.xml"));
@@ -39,6 +43,7 @@
 		
 		private function onMouseClick(e:MouseEvent)
 		{
+			trace(e.currentTarget);
 			// Instance name of button.
 			switch (e.currentTarget.name)
 			{
@@ -46,12 +51,21 @@
 					changeLocation("World Map");
 					break;
 			}
+			if (e.currentTarget is Town)
+			{
+				changeLocation("Overhead Carnival");
+				while (towns.length != 0)
+				{
+					var aTown:Town = towns.pop();
+					removeChild(aTown);
+					aTown.removeEventListener(MouseEvent.CLICK, onMouseClick);
+				}
+			}
 		}
 		
 		private function onTextLoadComplete(e:Event):void 
 		{
 			_overworldXML = new XMLList(e.target.data);
-			
 		}
 		
 		private function changeLocation(newLocation:String):void
@@ -60,7 +74,17 @@
 			
 			switch (this.currentLabel)
 			{
-				
+				case "World Map":
+					for (var i:int = 0; i < 5; ++i)
+					{
+						var aTown:Town = new Town();
+						aTown.x = Math.random() * stage.stageWidth;
+						aTown.y = Math.random() * stage.stageHeight / 2 + stage.stageHeight / 2;
+						this.addChild(aTown);
+						towns.push(aTown);
+						aTown.addEventListener(MouseEvent.CLICK, onMouseClick);
+					}
+					break;
 			}
 			
 			//_currentSection = newLocation;
