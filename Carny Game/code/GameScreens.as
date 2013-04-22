@@ -18,7 +18,15 @@
 	 */
 	public class GameScreens extends MovieClip 
 	{
-		private var _doc:Document;
+		private var theDoc:Document;
+		private var worldMap:WorldMap;
+		private var carnival:Carnival;
+		
+		private var screens:Array;
+		
+		private var _player:Player;
+		public function get player():Player { return _player; }
+		
 		private var _gameTextBox:GameTextBox;
 		private var _gameDialogBox:GameDialogBox;
 		
@@ -29,12 +37,15 @@
 
 		private var _pathRoom:int = 1;
 		
-		private var towns:Array;
-		
 		public function GameScreens(aDoc:Document) 
 		{
-			_doc = aDoc;
-			towns = new Array();
+			theDoc = aDoc;
+			_player = theDoc.player;
+			screens = new Array();
+			
+			screens.push(worldMap);
+			screens.push(carnival);
+			
 			changeLocation("Main Menu");
 			btnStartGame.addEventListener(MouseEvent.CLICK, onMouseClick);
 			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("OverworldText.xml"));
@@ -43,7 +54,6 @@
 		
 		private function onMouseClick(e:MouseEvent)
 		{
-			trace(e.currentTarget);
 			// Instance name of button.
 			switch (e.currentTarget.name)
 			{
@@ -54,12 +64,6 @@
 			if (e.currentTarget is Town)
 			{
 				changeLocation("Overhead Carnival");
-				while (towns.length != 0)
-				{
-					var aTown:Town = towns.pop();
-					removeChild(aTown);
-					aTown.removeEventListener(MouseEvent.CLICK, onMouseClick);
-				}
 			}
 		}
 		
@@ -68,23 +72,32 @@
 			_overworldXML = new XMLList(e.target.data);
 		}
 		
-		private function changeLocation(newLocation:String):void
+		private function removeAllScreens():void
+		{
+			for (var i:int = 0; i < screens.length; ++i)
+				if (screens[i])
+					removeChild(screens[i]);
+		}
+		
+		public function changeLocation(newLocation:String):void
 		{
 			this.gotoAndStop(newLocation);
+			removeAllScreens();
 			
 			switch (this.currentLabel)
 			{
 				case "World Map":
-					for (var i:int = 0; i < 5; ++i)
-					{
-						var aTown:Town = new Town();
-						aTown.x = Math.random() * stage.stageWidth;
-						aTown.y = Math.random() * stage.stageHeight / 2 + stage.stageHeight / 2;
-						this.addChild(aTown);
-						towns.push(aTown);
-						aTown.addEventListener(MouseEvent.CLICK, onMouseClick);
-					}
+					if (!worldMap)
+						worldMap = new WorldMap(this);
+					
+					addChild(worldMap);
 					break;
+					
+				case "Overhead Carnival":
+					if (!carnival)
+						carnival = new Carnival(null);
+						
+					addChild(carnival);
 			}
 			
 			//_currentSection = newLocation;
