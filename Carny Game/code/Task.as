@@ -1,10 +1,11 @@
 package code {
 	
 	import flash.display.MovieClip;
+	import flash.xml.*;
 	
 	public class Task extends MovieClip
 	{
-		protected var baseTime:int; //a base amount of time that the task will take
+		protected var baseTime:int; //a base amount of time that the task will take, measured in hours
 		protected var taskData:XML;
 		
 		public function Task(t:int)
@@ -23,7 +24,10 @@ package code {
 			{
 				if (success)
 				{
+					var s1:String = taskData.firstChild.childNodes[0];
+					var s2:String = taskData.firstChild.childNodes[1];
 					
+					trace(s1 + " " + s2);
 				}
 			}
 		}
