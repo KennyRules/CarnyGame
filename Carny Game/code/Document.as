@@ -4,6 +4,7 @@
 	import flash.events.KeyboardEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.media.Sound;
 	
 	public class Document extends MovieClip
 	{
@@ -13,11 +14,14 @@
 		private var _player:Player;
 		public function get player():Player { return _player; }
 		
+		private var _soundLib:SoundLibrary;		// Sound Library
+		
 		public function Document()
 		{
 			initPlayer();
 			initOverlay();
 			initOverworld();
+			initSound();
 		}
 		
 		private function initOverlay():void
@@ -35,6 +39,12 @@
 		{
 			gameScreenManager = new GameScreens(this);
 			addChild(gameScreenManager);
+		}
+		
+		private function initSound():void
+		{
+			_soundLib = new SoundLibrary();
+			_soundLib.loadSound("audio/9mmshot.mp3", "gunshot");
 		}
 	}
 }
