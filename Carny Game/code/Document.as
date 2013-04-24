@@ -45,6 +45,7 @@
 		{
 			_soundLib = new SoundLibrary();
 			_soundLib.loadSound("audio/9mmshot.mp3", "gunshot");
+			_soundLib.playSound("gunshot");
 		}
 	}
 }

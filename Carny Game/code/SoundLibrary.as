@@ -34,18 +34,36 @@ package code {
 		public function loadSound(url:String, key:String):void
 		{
 			// init sound instance
-			var sound:Sound = new Sound();
+			var sound:Sound = new Sound();		// Unqiue sound variable
 			
-			sound.addEventListener(Event.COMPLETE, onLoadComplete)
-			sound.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
-			
-			sound.load(new URLRequest(url));
+			sound.addEventListener(Event.COMPLETE, loadComplete(key));	// triggered on completed load
+			sound.addEventListener(IOErrorEvent.IO_ERROR, onIOError);	// catch errors - #2032 is bad filepath
+			sound.load(new URLRequest(url));		// begin to load the sound
+			sounds[key] = sound;					// save whatever we have
 		}
 		
-		function onLoadComplete(event:Event):void
+		// play a sound once
+		public function playSound(key:String):void
 		{
-			
+			var localSound:Sound = sounds[key] as Sound;
+			localSound.play();
 		}
+		
+		// play a looped sound
+		public function playSound_Loop(key:String, loops:int)
+		{
+			var localSound:Sound = sounds[key] as Sound;
+			localSound.play(0, loops);
+		}
+		
+		// overwrite an old sound with a completed one
+		function loadComplete(k:String):Function {
+			return function(event:Event):void {
+				sounds[k] = event.target;
+			}
+		}
+		
+		// error catch
 		function onIOError(event:IOErrorEvent)
 		{
 			trace("Could not load sound: " + event.text);
