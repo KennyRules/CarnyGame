@@ -33,6 +33,7 @@ package code {
 		{
 			//for basic variation just do random number and add it, have range of negative numbers
 			var incrementer:int = Math.random() * 10 - 5;
+			return incrementer;
 		}
 	}
 }
