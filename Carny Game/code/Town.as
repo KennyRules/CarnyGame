@@ -30,12 +30,20 @@ package code
 		
 		public function get visited():Boolean { return _visited; }
 		
-		public function Town(aWorldMap:WorldMap) 
+		public function Town(aWorldMap:WorldMap, aName:String, aPop:int, aWealth:Number, aEmployRate:Number) 
 		{
 			_worldMap = aWorldMap;
+			_townName = aName;
+			_population = aPop;
+			_wealth = aWealth;
+			_employmentRate = aEmployRate;
+			_visited = false;
 			_player = worldMap.player;
 		}
 		
-		
+		public function visitTown():void
+		{
+			_visited = true;
+		}
 	}
 }
