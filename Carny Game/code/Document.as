@@ -22,6 +22,7 @@
 			initOverlay();
 			initOverworld();
 			initSound();
+			testTask();
 		}
 		
 		private function initOverlay():void
@@ -46,6 +47,12 @@
 			_soundLib = new SoundLibrary();
 			_soundLib.loadSound("audio/9mmshot.mp3", "gunshot");
 			_soundLib.playSound("gunshot");
+		}
+		
+		private function testTask():void
+		{
+			var testTask:Task = new Task(4);
+			testTask.loadXML("TestXML.xml");
 		}
 	}
 }

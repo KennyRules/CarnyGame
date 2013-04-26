@@ -1,23 +1,30 @@
 package code {
 	
 	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
 	import flash.xml.*;
 	
 	public class Task extends MovieClip
 	{
 		protected var baseTime:int; //a base amount of time that the task will take, measured in hours
 		protected var taskData:XML;
+		protected var xmlLoader:URLLoader;
 		
 		public function Task(t:int)
 		{
 			baseTime = t;
-			taskData = new XML();
+			xmlLoader = new URLLoader();
 		}
 		
 		//load up an XML file that contains information about the task and dialogue
 		//this can be overwritten in subclasses
 		public function loadXML(xmlFile:String):void
 		{
+			xmlLoader.load(new URLRequest(xmlFile));
+			xmlLoader.addEventListener(Event.COMPLETE, processXML);
+
 			taskData.ignoreWhite = true;
 			taskData.load(xmlFile);
 			taskData.onLoad = function(success)
@@ -31,6 +38,14 @@ package code {
 				}
 			}
 		}
+		
+		public function processXML(e:Event):void
+		{
+			taskData = new XML(e.target.data);
+			trace(taskData);
+		}
+		/**
+		*/
 		
 		//variable amounts of time for the task
 		public function actualTime():int
