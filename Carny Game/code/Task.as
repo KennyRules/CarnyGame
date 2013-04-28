@@ -1,4 +1,4 @@
-package code {
+﻿package code {
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
