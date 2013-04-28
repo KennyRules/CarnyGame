@@ -26,6 +26,7 @@
 		public function Carnival(aTown:Town) 
 		{
 			town = aTown;
+			_player = town.player;
 			_hoursLeft = MAX_HOURS;
 			quadrants = new Array();
 			quadrants.push(Rides);
@@ -66,6 +67,7 @@
 		private function onBackClick(e:MouseEvent):void
 		{
 			clearEvents();
+			player.getPaid();
 			town.worldMap.returnToOverworld();
 		}
 		

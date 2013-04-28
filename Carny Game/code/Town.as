@@ -1,4 +1,4 @@
-package code 
+﻿package code 
 {
 	import flash.display.MovieClip;
 
@@ -17,17 +17,11 @@ package code
 		private var _visited:Boolean;
 		
 		public function get townName():String { return _townName; }
-		
 		public function get player():Player { return _player; }
-		
 		public function get worldMap():WorldMap { return _worldMap; }
-		
 		public function get population():int { return _population; }
-		
 		public function get wealth():Number { return _wealth; }
-		
 		public function get employmentRate():Number { return _employmentRate; }
-		
 		public function get visited():Boolean { return _visited; }
 		
 		public function Town(aWorldMap:WorldMap, aName:String, aPop:int, aWealth:Number, aEmployRate:Number) 
@@ -38,12 +32,14 @@ package code
 			_wealth = aWealth;
 			_employmentRate = aEmployRate;
 			_visited = false;
+			visitedFlag.visible = false;
 			_player = worldMap.player;
 		}
 		
 		public function visitTown():void
 		{
 			_visited = true;
+			visitedFlag.visible = true;
 		}
 	}
 }

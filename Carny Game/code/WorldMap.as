@@ -10,15 +10,18 @@
 	public class WorldMap extends MovieClip 
 	{
 		private const MAX_TOWNS:int = 5;
+		private const MAX_WEEKS:int = 13;
 		
 		private var gameScreenManager:GameScreens;
 		private var _player:Player;
 		private var _currentTown:Town;
+		private var _weeksLeft:int;
 		private var towns:Array;
 		private var townPopup:TownPopupBox;
 		
 		public function get player():Player { return _player; }
 		public function get currentTown():Town { return _currentTown; }
+		public function get weeksLeft():int { return _weeksLeft; }
 		
 		public function WorldMap(aManager:GameScreens)
 		{
@@ -29,6 +32,7 @@
 			_currentTown = null;
 			
 			initTowns();
+			_weeksLeft = MAX_WEEKS;
 			
 			townPopup = new TownPopupBox();
 			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
@@ -36,11 +40,22 @@
 			townPopup.visible = false;
 			
 			this.addEventListener(MouseEvent.CLICK, onWorldClick);
+			updateInfo();
 		}
 		
+		// Call when day at carnival is done.
 		public function returnToOverworld():void
 		{
-			gameScreenManager.changeLocation("World Map");
+			_weeksLeft--;
+			if (_weeksLeft > 0)
+			{
+				updateInfo();
+				gameScreenManager.changeLocation("World Map");
+			}
+			else
+			{
+				// TO-DO: Handle the end of game, evaluation, etc.
+			}
 		}
 		
 		private function initTowns():void
@@ -84,7 +99,6 @@
 			townPopup.x = mouseX;
 			townPopup.y = mouseY;
 			
-			
 			// Make sure the entire pop-up box fits in the window.
 			if (townPopup.x + townPopup.width >= stage.stageWidth)
 				townPopup.x -= (townPopup.x + townPopup.width - stage.stageWidth);
@@ -96,7 +110,14 @@
 		private function onTravelClick(e:MouseEvent):void
 		{
 			_currentTown = townPopup.town;
+			_currentTown.visitTown();
 			gameScreenManager.changeLocation("Overhead Carnival");
+		}
+		
+		private function updateInfo():void
+		{
+			txtWeeksLeft.text = "Weeks Left: " + _weeksLeft;
+			txtWealth.text = "Wealth: " + player.wealth;
 		}
 	}
 }
