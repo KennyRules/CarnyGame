@@ -1,4 +1,4 @@
-package code 
+﻿package code 
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
@@ -13,30 +13,37 @@ package code
 		
 		private var gameScreenManager:GameScreens;
 		private var _player:Player;
+		private var _currentTown:Town;
 		private var towns:Array;
-		private var currentTown:Town;
 		private var townPopup:TownPopupBox;
 		
 		public function get player():Player { return _player; }
+		public function get currentTown():Town { return _currentTown; }
 		
-		public function WorldMap(aManager:GameScreens) 
+		public function WorldMap(aManager:GameScreens)
 		{
 			gameScreenManager = aManager;
 			_player = gameScreenManager.player;
 			
 			towns = new Array();
-			currentTown = null;
+			_currentTown = null;
 			
 			initTowns();
 			
 			townPopup = new TownPopupBox();
+			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
 			addChild(townPopup);
 			townPopup.visible = false;
 			
 			this.addEventListener(MouseEvent.CLICK, onWorldClick);
 		}
 		
-		private function initTowns()
+		public function returnToOverworld():void
+		{
+			gameScreenManager.changeLocation("World Map");
+		}
+		
+		private function initTowns():void
 		{
 			for (var i:int = 0; i < MAX_TOWNS; ++i)
 			{
@@ -48,37 +55,48 @@ package code
 			}
 		}
 		
-		private function onWorldClick(e:MouseEvent)
+		private function onWorldClick(e:MouseEvent):void
 		{
-			trace(e.target);
 			if (e.target is Town)
 			{
-				if (currentTown)
+				if (_currentTown)
 				{
 					// TO-DO: Pop-up message detailing travel plans, etc.
 				}
 				
 				showPopup(e.target as Town);
-				//gameScreenManager.changeLocation("Overhead Carnival");	
 			}
 			else
 			{
 				townPopup.visible = false;
+				townPopup.unloadInfo();
 			}
 		}
 		
-		public function showPopup(aTown:Town)
+		public function showPopup(aTown:Town):void
 		{
+			// Don't move the popup box if it's the same town.
+			if (townPopup.town == aTown)
+				return;
+				
 			townPopup.visible = true;
 			townPopup.loadInfo(aTown);
 			townPopup.x = mouseX;
 			townPopup.y = mouseY;
 			
+			
+			// Make sure the entire pop-up box fits in the window.
 			if (townPopup.x + townPopup.width >= stage.stageWidth)
 				townPopup.x -= (townPopup.x + townPopup.width - stage.stageWidth);
 				
 			if (townPopup.y + townPopup.height >= stage.stageHeight)
 				townPopup.y -= (townPopup.y + townPopup.height - stage.stageHeight);
+		}
+		
+		private function onTravelClick(e:MouseEvent):void
+		{
+			_currentTown = townPopup.town;
+			gameScreenManager.changeLocation("Overhead Carnival");
 		}
 	}
 }

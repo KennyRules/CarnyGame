@@ -1,4 +1,4 @@
-package code 
+﻿package code 
 {
 	import flash.display.Sprite;
 	
@@ -8,18 +8,27 @@ package code
 	 */
 	public class TownPopupBox extends Sprite 
 	{
+		private var _town:Town;
+		public function get town():Town { return _town; }
+		
 		public function TownPopupBox() 
 		{
-			
+			_town = null;
 		}	
 		
-		public function loadInfo(aTown:Town)
+		public function loadInfo(aTown:Town):void
 		{
-			inputName.text = aTown.name;
-			inputPop.text = aTown.population.toString();
-			inputWealth.text = aTown.wealth.toString();
-			inputEmploy.text = aTown.employmentRate.toString();
-			inputVisited.text = aTown.visited.toString();
+			_town = aTown;
+			inputName.text = _town.name;
+			inputPop.text = _town.population.toString();
+			inputWealth.text = _town.wealth.toString();
+			inputEmploy.text = _town.employmentRate.toString();
+			inputVisited.text = _town.visited.toString();
+		}
+		
+		public function unloadInfo():void
+		{
+			_town = null;
 		}
 	}
 }

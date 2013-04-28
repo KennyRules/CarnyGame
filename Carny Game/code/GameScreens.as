@@ -94,8 +94,7 @@
 					break;
 					
 				case "Overhead Carnival":
-					if (!carnival)
-						carnival = new Carnival(null);
+					carnival = new Carnival(worldMap.currentTown);
 						
 					addChild(carnival);
 			}
