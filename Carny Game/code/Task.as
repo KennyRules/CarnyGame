@@ -1,7 +1,8 @@
-package code {
+﻿package code {
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.xml.*;
@@ -24,9 +25,11 @@ package code {
 		{
 			xmlLoader.load(new URLRequest(xmlFile));
 			xmlLoader.addEventListener(Event.COMPLETE, processXML);
+			xmlLoader.addEventListener(IOErrorEvent.IO_ERROR, onLoadingError);
 
-			taskData.ignoreWhite = true;
-			taskData.load(xmlFile);
+			//taskData.ignoreWhite = true;
+			//taskData.load(xmlFile);
+			/**
 			taskData.onLoad = function(success)
 			{
 				if (success)
@@ -36,16 +39,19 @@ package code {
 					
 					trace(s1 + " " + s2);
 				}
-			}
+			}*/
 		}
 		
-		public function processXML(e:Event):void
+		private function processXML(e:Event):void
 		{
 			taskData = new XML(e.target.data);
 			trace(taskData);
 		}
-		/**
-		*/
+		
+		private function onLoadingError(e:Event):void
+		{
+			trace("XML file did not load correctly"); 
+		}
 		
 		//variable amounts of time for the task
 		public function actualTime():int

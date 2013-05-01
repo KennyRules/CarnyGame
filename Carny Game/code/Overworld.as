@@ -1,154 +1,106 @@
 ﻿package code 
 {
+	import code.graphics.GameButton;
+	import flash.display.Bitmap;
+	import flash.display.Loader;
+	import flash.display.LoaderInfo;
 	import flash.display.MovieClip;
-	import flash.events.MouseEvent;
+	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	
+
 	/**
 	 * ...
 	 * @author Drew Diamantoukos
 	 */
-	public class WorldMap extends MovieClip 
+	public class GameScreens extends MovieClip 
 	{
-		private const MAX_TOWNS:int = 5;
-		private const MAX_WEEKS:int = 13;
-		
-		private var gameScreenManager:GameScreens;
-		private var towns:Array;
-		private var townPopup:TownPopupBox;
-		
-		private var _mapXml:XMLList;
-		private var _currentXML:XMLList;
+		private var _doc:Document;
 		private var _gameTextBox:GameTextBox;
 		private var _gameDialogBox:GameDialogBox;
-		private var _player:Player;
-		private var _currentTown:Town;
-		private var _weeksLeft:int;
-		private var _currentIndex:int;
-		private var _currentSection:String;
 		
-		public function get player():Player { return _player; }
-		public function get currentTown():Town { return _currentTown; }
-		public function get weeksLeft():int { return _weeksLeft; }
-		
-		public function WorldMap(aManager:GameScreens)
+		private var _overworldXML:XMLList;
+		private var _currentXML:XMLList;
+		private var _currentSection:String = "Room";
+		private var _currentIndex:int = 0;
+
+		public function GameScreens(aDoc:Document) 
 		{
-			gameScreenManager = aManager;
-			_player = gameScreenManager.player;
-			
-			towns = new Array();
-			_currentTown = null;
-			_mapXml = null;
-			_currentXML = null;
-			
-			initTowns();
-			_weeksLeft = MAX_WEEKS;
-			
-			townPopup = new TownPopupBox();
-			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
-			addChild(townPopup);
-			townPopup.visible = false;
-			updateInfo();
-			
-			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("WorldMapText.xml"));
+			_doc = aDoc;
+			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("OverworldText.xml"));
 			textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
 		}
 		
-		private function onTextLoadComplete(e:Event):void
+		private function onTextLoadComplete(e:Event):void 
 		{
-			_mapXml = new XMLList(e.target.data);
+			_overworldXML = new XMLList(e.target.data);
+			changeLocation("Room");
+			_isAllowedToRoom = false;
+		}
+		
+		private function changeLocation(newLocation:String):void
+		{
+			this.gotoAndStop(newLocation);
+			
+			switch (this.currentLabel)
+			{
+				
+			}
+			
+			_currentSection = newLocation;
 			loadXmlSection();
 		}
-		
-		// Call when day at carnival is done.
-		public function returnToOverworld():void
-		{
-			_weeksLeft--;
-			if (_weeksLeft > 0)
-			{
-				updateInfo();
-				gameScreenManager.changeLocation("World Map");
-			}
-			else
-			{
-				// TO-DO: Handle the end of game, evaluation, etc.
-			}
-		}
-		
-		private function initTowns():void
-		{
-			for (var i:int = 0; i < MAX_TOWNS; ++i)
-			{
-				var aTown:Town = new Town(this, "Town " + i, Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
-				aTown.x = Math.random() * gameScreenManager.stage.stageWidth;
-				aTown.y = Math.random() * gameScreenManager.stage.stageHeight / 2 + Math.random() * gameScreenManager.stage.stageHeight / 2;
-				addChild(aTown);
-				towns.push(aTown);
-			}
-		}
-		
-		private function onWorldClick(e:MouseEvent):void
-		{
-			if (e.target is Town)
-			{
-				if (_currentTown)
-				{
-					// TO-DO: Pop-up message detailing travel plans, etc.
-				}
-				
-				showPopup(e.target as Town);
-			}
-			else
-			{
-				townPopup.visible = false;
-				townPopup.unloadInfo();
-			}
-		}
-		
-		public function showPopup(aTown:Town):void
-		{
-			// Don't move the popup box if it's the same town.
-			if (townPopup.town == aTown)
-				return;
-				
-			townPopup.visible = true;
-			townPopup.loadInfo(aTown);
-			townPopup.x = mouseX;
-			townPopup.y = mouseY;
-			
-			// Make sure the entire pop-up box fits in the window.
-			if (townPopup.x + townPopup.width >= stage.stageWidth)
-				townPopup.x -= (townPopup.x + townPopup.width - stage.stageWidth);
-				
-			if (townPopup.y + townPopup.height >= stage.stageHeight)
-				townPopup.y -= (townPopup.y + townPopup.height - stage.stageHeight);
-		}
-		
-		private function onTravelClick(e:MouseEvent):void
-		{
-			_currentTown = townPopup.town;
-			_currentTown.visitTown();
-			gameScreenManager.changeLocation("Overhead Carnival");
-		}
-		
-		private function updateInfo():void
-		{
-			txtWeeksLeft.text = "Weeks Left: " + _weeksLeft;
-			txtWealth.text = "Wealth: " + player.wealth;
-		}
-		
+
 		// Loads a new section of the XML to display.
 		private function loadXmlSection():void
 		{
 			_currentXML = null;
 			_currentIndex = 0;
-			for each (var xmlPiece:XML in _mapXml.child("Section"))
+			for each (var xmlPiece:XML in _overworldXML.child("Section"))
 			{
-				_currentXML = XMLList(xmlPiece);
+				if (xmlPiece.@id == _currentSection)
+				{
+					switch (_currentSection)
+					{
+						case "Room":
+							if (_pathRoom.toString() == xmlPiece.@path)
+							{
+								_currentXML = XMLList(xmlPiece);
+							}
+							break;
+						case "Town":
+							if (_pathTown.toString() == xmlPiece.@path)
+							{
+								_currentXML = XMLList(xmlPiece);
+							}
+							break;
+						case "Store":
+							trace(_pathStore);
+							if (_pathStore.toString() == xmlPiece.@path)
+							{
+								if (_overworldXML.child("Section").(@id == _currentSection).(@path == _pathStore.toString()).length() >= 2)
+								{
+									if (_isEricEnabled == true)
+									{
+										_currentXML = XMLList(_overworldXML.child("Section").(@id == _currentSection)[0]);
+									}
+									else
+									{
+										_currentXML = XMLList(_overworldXML.child("Section").(@id == _currentSection)[1]);
+									}
+								}
+								else
+								{
+									_currentXML = XMLList(xmlPiece);
+								}
+							}
+							break;
+					}
+				}
 			}
-
+			
 			if (_currentXML != null)
 			{
 				_gameTextBox = new GameTextBox(_currentXML.Text[_currentIndex]);
@@ -156,18 +108,18 @@
 				_gameTextBox.addEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 			}
 		}
-
+		
 		private function onMessageComplete(e:MessageEvent):void
 		{
 			// Checks null attribute - (_overworldXML.child(_currentChild).Text[_currentIndex].@index).toString() == ""
 			// .name() gets the node name.
-
+			
 			if (_currentXML == null)
 			{
 				clearMessageBox();
 				return;
 			}
-
+				
 			_currentIndex++;
 			// If there is a node to evaluate within bounds.
 			if (_currentIndex < _currentXML.children().length())
@@ -201,7 +153,7 @@
 					{
 						_currentXML = XMLList(_currentXML.parent());
 					}
-
+					
 					// Now, fina the position of this node in the parent of the current node. This is where we continue the tree.
 					for (var i:int = 0; i < _currentXML.parent().children().length(); i++ )
 					{
@@ -219,14 +171,13 @@
 				clearMessageBox();
 			}
 		}
-
+		
 		private function clearMessageBox():void
 		{
 			_gameTextBox.removeEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 			removeChild(_gameTextBox);
-			this.addEventListener(MouseEvent.CLICK, onWorldClick);
 		}
-
+		
 		private function addDialogBox():void
 		{
 			var choices:Array = new Array();
@@ -234,25 +185,25 @@
 			{
 				choices.push(_currentXML[i].@choice);
 			}
-
+			
 			_gameDialogBox = new GameDialogBox(choices);
 			addChild(_gameDialogBox);
 			_gameDialogBox.x = stage.stageWidth - _gameDialogBox.width;
 			_gameDialogBox.y = stage.stageHeight / 2 - _gameDialogBox.height / 2;
 			_gameDialogBox.addEventListener(MessageEvent.ON_DIALOG_SELECT, onDialogSelect);
 		}
-
+		
 		// Remove the dialog box, continue reading text from the xml tree from the choice selected.
 		private function onDialogSelect(e:MessageEvent):void
 		{
 			_gameDialogBox.removeEventListener(MessageEvent.ON_DIALOG_SELECT, onDialogSelect);
 			removeChild(_gameDialogBox);
-
+			
 			if (_currentXML[e.dialogSelected].@flag != null)
 			{
 				switch ((_currentXML[e.dialogSelected].@flag).toString())
 				{
-
+					
 				}
 			}
 			_currentIndex = 0;
