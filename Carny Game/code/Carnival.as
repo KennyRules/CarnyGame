@@ -1,7 +1,9 @@
 ﻿package code 
 {
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.events.Event;
 	
 	/**
 	 * ...
@@ -23,6 +25,9 @@
 		private var _hoursLeft:int;
 		public function get hoursLeft():int { return _hoursLeft; }
 		
+		private var _btnHire:Sprite;
+		private var _hireScreen:HireScreen;
+		
 		public function Carnival(aTown:Town) 
 		{
 			town = aTown;
@@ -39,7 +44,34 @@
 			for (var i:int = 0; i < quadrants.length; ++i)
 				quadrants[i].addEventListener(MouseEvent.CLICK, onQuadrantSelect);
 				
+			_btnHire = new Sprite();
+			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
+			_btnHire.graphics.beginFill(0xFF0000, 1.0);
+			_btnHire.graphics.drawRect(0, 0, 50, 50);
+			_btnHire.addEventListener(MouseEvent.CLICK, onHireClick);
+			addChild(_btnHire);
+			
+			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 			updateInfo();
+		}
+		
+		private function onStageAdd(e:Event):void
+		{
+			_hireScreen = new HireScreen(this);
+			addChild(_hireScreen);
+			_hireScreen.visible = false;
+		}
+		
+		private function onHireClick(e:MouseEvent):void
+		{
+			_btnHire.removeEventListener(MouseEvent.CLICK, onHireClick);
+			_hireScreen.showScreen();
+		}
+		
+		public function hideHireScreen():void
+		{
+			_btnHire.addEventListener(MouseEvent.CLICK, onHireClick);
+			_hireScreen.hideScreen();
 		}
 		
 		private function onQuadrantSelect(e:MouseEvent):void

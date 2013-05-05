@@ -52,8 +52,10 @@
 			townPopup.visible = false;
 			updateInfo();
 			
-			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("WorldMapText.xml"));
-			textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
+			this.addEventListener(MouseEvent.CLICK, onWorldClick);
+			
+			//var textUrlLoader:URLLoader = new URLLoader(new URLRequest("WorldMapText.xml"));
+			//textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
 		}
 		
 		private function onTextLoadComplete(e:Event):void
