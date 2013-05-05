@@ -100,6 +100,7 @@
 		{
 			clearEvents();
 			player.getPaid();
+			trace(player.employees.length);
 			town.worldMap.returnToOverworld();
 		}
 		
