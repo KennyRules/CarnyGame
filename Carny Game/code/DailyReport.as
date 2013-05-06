@@ -38,6 +38,7 @@
 			
 			// Set up the report menu
 			setDay();
+			setIncome();
 			setEmployees();
 		}
 		
@@ -50,7 +51,7 @@
 		// Will display the income data
 		private function setIncome()
 		{
-			
+			textbox_money.text = "Total money: $" + _player.wealth;
 		}
 		
 		//  Display our list of employees
@@ -72,14 +73,17 @@
 				button.x = 200;
 				addChild(button);
 				
-				button.addEventListener(MouseEvent.CLICK, onClick);
+				button.addEventListener(MouseEvent.CLICK, onClick(i));
 			}
 		}
 		
-		//function 
-		
-		private function onClick(e:MouseEvent):void {
-			
+		// parameterized eventListener
+		function onClick(i:Number):Function {
+			return function(e:MouseEvent):void {
+				// remove the employee
+				_player.employees.splice(i,1);
+				_employee_textfields.splice(i,1);
+			}
 		}
 		
 	}
