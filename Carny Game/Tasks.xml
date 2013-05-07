@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<Task id="FROG RIDE" predecessor=""> 
+		<Text character="Helga">Hey Boss! Look at this mud on my shoe! Now how are supposed to expect crowds if you have so many beefs?</Text>
+		<Text character="Owner">Beefs?! What beefs, the season hasn’t even started yet!</Text>
+		<Text character="Helga">Yea, but the coyboys have started entering and ruining this place up!</Text>
+		<Text character="Owner">*Sigh*...Now what did they do?</Text>
+		<Text character="Helga">These cowboys came riding in with bats and started knocking off the ears of the rabbit on the carousel.</Text>
+		<Dialog>
+			<Choice choice="Try to repair the rabbit">
+				<Text character="Owner">I’ll go see if I can do a quick fix.</Text>
+				<Text character="Helga">How do you think you are going to do that with solid wood?</Text>
+				<Text character="Owner"> I don’t know yet.  Let me go take a look at it and see what I can do.</Text>
+				<Text character="">A little while later...</Text>
+				<Text character="Owner">Ok so I can’t fix this one.  Looks like we’ll have to replace it.</Text>
+				<Text character="Helga">How about those new fancy metal ones?</Text>
+				<Text character="Owner">How in the world are we going to afford that? The season hasn’t even started yet.  I’ll have to go look for an older down at Joe’s place.</Text>
+				<Text character="">A few hours later...</Text>
+				<Text character="Owner">Well they didn’t have any rabbits, but they had a couple of frogs that we could use to replace them.</Text>
+				<Text character="Helga">Frogs gross, who in their right mind would want to ride a frog?</Text>
+				<Text character="Owner">Its what they had, that we could afford.  Besides, Mary likes frogs, why wouldn’t other children? Now go fetch a few guys to help me put these things on.</Text>
+				<Text character="Helga">Mary is a freak, so I do not think kids will follow her, but if you're lost.</Text>
+			</Choice>
+			<Choice choice="Look for a replacement">
+				<Text character="Owner">Looks like we’ll have to replace it.</Text>
+				<Text character="Helga">How about those new fancy metal ones?</Text>
+				<Text character="Owner">How in the world are we going to afford that? The season hasn’t even started yet. I’ll have to go look for an older down at Joe’s place.</Text>
+				<Text character="">A few hours later...</Text>
+				<Text character="Owner">Well they didn’t have any rabbits, but they had a couple of frogs that we could use to replace them.</Text>
+				<Text character="Helga">Frogs gross, who in their right mind would want to ride a frog?</Text>
+				<Text character="Owner">Its what they had, that we could afford.  Besides, Mary likes frogs, why wouldn’t other children? Now go fetch a few guys to help me put these things on.</Text>
+				<Text character="Helga">Mary is a freak, so I do not think kids will follow her, but if you're lost.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+</data>
