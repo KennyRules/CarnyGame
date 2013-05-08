@@ -4,6 +4,7 @@
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
+	import code.DailyReport;
 	
 	/**
 	 * ...
@@ -12,6 +13,7 @@
 	public class Carnival extends MovieClip 
 	{
 		private var town:Town;
+		public function get getTown():Town { return town; }
 		private var quadrants:Array;
 		
 		private var _player:Player;
@@ -86,7 +88,8 @@
 			if (_hoursLeft <= 0)
 			{
 				// TO-DO: Display "end of day" report, associated logic. For now, just go back to world map.
-				btnBack.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+				var report:DailyReport = new DailyReport(512, 384, this);
+				addChild(report);
 			}
 			updateInfo();
 		}

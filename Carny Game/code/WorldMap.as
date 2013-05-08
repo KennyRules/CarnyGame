@@ -12,8 +12,8 @@
 	 */
 	public class WorldMap extends MovieClip 
 	{
-		private const MAX_TOWNS:int = 5;
-		private const MAX_WEEKS:int = 13;
+		private const MAX_TOWNS:int = 11;
+		private const MAX_DAYS:int = 7;
 		
 		private var gameScreenManager:GameScreens;
 		private var towns:Array;
@@ -25,13 +25,13 @@
 		private var _gameDialogBox:GameDialogBox;
 		private var _player:Player;
 		private var _currentTown:Town;
-		private var _weeksLeft:int;
+		private var _daysLeft:int;
 		private var _currentIndex:int;
 		private var _currentSection:String;
 		
 		public function get player():Player { return _player; }
 		public function get currentTown():Town { return _currentTown; }
-		public function get weeksLeft():int { return _weeksLeft; }
+		public function get daysLeft():int { return _daysLeft; }
 		
 		public function WorldMap(aManager:GameScreens)
 		{
@@ -44,7 +44,7 @@
 			_currentXML = null;
 			
 			initTowns();
-			_weeksLeft = MAX_WEEKS;
+			_daysLeft = MAX_DAYS;
 			
 			townPopup = new TownPopupBox();
 			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
@@ -67,8 +67,8 @@
 		// Call when day at carnival is done.
 		public function returnToOverworld():void
 		{
-			_weeksLeft--;
-			if (_weeksLeft > 0)
+			_daysLeft--;
+			if (_daysLeft > 0)
 			{
 				updateInfo();
 				gameScreenManager.changeLocation("World Map");
@@ -76,18 +76,6 @@
 			else
 			{
 				// TO-DO: Handle the end of game, evaluation, etc.
-			}
-		}
-		
-		private function initTowns():void
-		{
-			for (var i:int = 0; i < MAX_TOWNS; ++i)
-			{
-				var aTown:Town = new Town(this, "Town " + i, Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
-				aTown.x = Math.random() * gameScreenManager.stage.stageWidth;
-				aTown.y = Math.random() * gameScreenManager.stage.stageHeight / 2 + Math.random() * gameScreenManager.stage.stageHeight / 2;
-				addChild(aTown);
-				towns.push(aTown);
 			}
 		}
 		
@@ -137,7 +125,7 @@
 		
 		private function updateInfo():void
 		{
-			txtWeeksLeft.text = "Weeks Left: " + _weeksLeft;
+			txtDaysLeft.text = "Days Left: " + _daysLeft;
 			txtWealth.text = "Wealth: " + player.wealth;
 		}
 		
@@ -261,6 +249,78 @@
 			_currentXML = XMLList(_currentXML[e.dialogSelected]);
 			_gameTextBox.loadMessage(_currentXML.Text[_currentIndex]);
 			_gameTextBox.addEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
+		}
+		
+		private function initTowns():void
+		{
+			var aTown:Town = new Town(this, "Nebraska Middle Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 180;
+			aTown.y = 150;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Nebraska Left Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 80;
+			aTown.y = 220;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Nebraska Right Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 400;
+			aTown.y = 320;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Kansas Left", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 203;
+			aTown.y = 409;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Kansas Right Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 525;
+			aTown.y = 396;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Kansas Right Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 555;
+			aTown.y = 566;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Iowa Right Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 755;
+			aTown.y = 126;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Iowa Left Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 555;
+			aTown.y = 286;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Iowa Right Middle", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 802;
+			aTown.y = 205;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Missouri Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 745;
+			aTown.y = 366;
+			addChild(aTown);
+			towns.push(aTown);
+			
+			aTown = new Town(this, "Missouri Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown.x = 715;
+			aTown.y = 606;
+			addChild(aTown);
+			towns.push(aTown);
+
+			
+			
 		}
 	}
 }

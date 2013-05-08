@@ -19,7 +19,7 @@
 		public function loadInfo(aTown:Town):void
 		{
 			_town = aTown;
-			inputName.text = _town.name;
+			inputName.text = _town.townName;
 			inputPop.text = _town.population.toString();
 			inputWealth.text = _town.wealth.toString();
 			inputEmploy.text = _town.employmentRate.toString();
