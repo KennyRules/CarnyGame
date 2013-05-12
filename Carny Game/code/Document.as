@@ -51,8 +51,8 @@
 		
 		private function testTask():void
 		{
-			var testTask:Task = new Task(4);
-			testTask.loadXML("TestXML.xml");
+			var testTask:Task = new Task();
+			//testTask.loadXML("TestXML.xml");
 		}
 	}
 }

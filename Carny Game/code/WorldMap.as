@@ -134,7 +134,7 @@
 		{
 			_currentXML = null;
 			_currentIndex = 0;
-			for each (var xmlPiece:XML in _mapXml.child("Section"))
+			for each (var xmlPiece:XML in _mapXml.child("Task"))
 			{
 				_currentXML = XMLList(xmlPiece);
 			}
