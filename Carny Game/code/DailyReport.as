@@ -89,7 +89,7 @@
 				removeChild(_employee_textfields[i]);
 				removeChild(_firebuttons[i]);
 			}
-			for(var i = 0; i < _player.employees.length + 1; ++i)	// clear the arrays
+			for(i = 0; i < _player.employees.length + 1; ++i)	// clear the arrays
 			{
 				_firebuttons[i].removeEventListener(MouseEvent.CLICK, onClick(i));
 				_employee_textfields.pop();
