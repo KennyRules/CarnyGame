@@ -25,6 +25,7 @@
 			</Choice>
 		</Dialog>
 	</Task>
+	
 	<Task id="FROG RIDE" predecessor="" location="rides" hours=""> 
 		<Text character="Helga">Hey Boss! Look at this mud on my shoe! Now how are supposed to expect crowds if you have so many beefs?</Text>
 		<Text character="Owner">Beefs?! What beefs, the season hasn’t even started yet!</Text>
@@ -42,7 +43,7 @@
 				<Text character="Owner">How in the world are we going to afford that? The season hasn’t even started yet.  I’ll have to go look for an older down at Joe’s place.</Text>
 				<Text character="">A few hours later...</Text>
 				<Text character="Owner">Well they didn’t have any rabbits, but they had a couple of frogs that we could use to replace them.</Text>
-				<Text character="Helga">Frogs gross, who in their right mind would want to ride a frog?</Text>
+				<Text character="Helga">Frogs are gross, who in their right mind would want to ride a frog?</Text>
 				<Text character="Owner">Its what they had, that we could afford.  Besides, Mary likes frogs, why wouldn’t other children? Now go fetch a few guys to help me put these things on.</Text>
 				<Text character="Helga">Mary is a freak, so I do not think kids will follow her, but if you're lost.</Text>
 			</Choice>
@@ -52,9 +53,92 @@
 				<Text character="Owner">How in the world are we going to afford that? The season hasn’t even started yet. I’ll have to go look for an older down at Joe’s place.</Text>
 				<Text character="">A few hours later...</Text>
 				<Text character="Owner">Well they didn’t have any rabbits, but they had a couple of frogs that we could use to replace them.</Text>
-				<Text character="Helga">Frogs gross, who in their right mind would want to ride a frog?</Text>
+				<Text character="Helga">Frogs are gross, who in their right mind would want to ride a frog?</Text>
 				<Text character="Owner">Its what they had, that we could afford.  Besides, Mary likes frogs, why wouldn’t other children? Now go fetch a few guys to help me put these things on.</Text>
 				<Text character="Helga">Mary is a freak, so I do not think kids will follow her, but if you're lost.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+	
+	<Task id="RIDES INSPECTION 1" predecessor="" location="rides" hours="">
+		<Text character="Owner">Hey Scotty, when was the last time the rides inspected?</Text>
+		<Text character="Scotty">Last night during closing I believe.</Text>
+		<Dialog>
+			<Choice choice="Go inspect the rides" hoursMod="3">
+				<Text character="Owner">Okay, I’ll go inspect them now.</Text>
+			</Choice>
+			<Choice choice="Inspect them later" hoursMod="5">
+				<Text character="Owner">Okay. They should be fine then. I’ll just give them a good look over tonight.</Text>
+				<Text character="Scotty">If you think they will be alright.</Text>
+				<Text character="">About 20 minutes later...</Text>
+				<Text character="Customer">Hey, one of the cars on the Ferris wheel is really shaky.</Text>
+				<Text character="Owner">*Sigh*  Alright. I’ll shut it down for maintenance and see if I can get it back up and running soon.</Text>
+				<Text character="Customer">You better if you don't want an accident around here.</Text>
+				<Text character="Owner">Don't worry, I'll make sure it's safe before anyone else gets on it.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+	
+	<Task id="RIDES INSPECTION 2" predecessor="" location="rides" hours="">
+		<Text character="Helga">Hey Boss, do you have a minute?</Text>
+		<Dialog>
+			<Choice choice="No" hoursMod="3">
+				<Text character="Owner"> No, sorry Helga, I have to go inspect the rides now.  But if you really need to talk we can do it on the way.</Text>
+				<Text character="Helga">No it can wait.  I want your full attention.</Text>
+			</Choice>
+			<Choice choice="Sure, but only for a minute" hoursMod="5">
+				<Text character="Owner">Sure, but only a minute.</Text>
+				<Text character="Helga">I want a stage in my tent so my younger customers can stop coming up and pulling on my beard.</Text>
+				<Text character="Owner">We really do not have the money for you to get a stage.</Text>
+				<Text character="Helga">But everyone else seem to get special stuff like Tessa with her snake cages and Scotty with his fancy tent for his height.</Text>
+				<Text character="Owner">Both of those things are needed for them to be able to do their acts.</Text>
+				<Text character="">Two hours of arguing later...</Text>
+				<Text character="Owner">Look Helga, I really need to check on the rides.</Text>
+				<Text character="Helga">Like always, avoiding the problem.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+	
+	<Task id="REPAIR RIDE" predecessor="" location="rides" hours="">
+		<Text character="Mary">Daddy, I just took a ride on the Ferris wheel and the door on the car wouldn’t close all the way.</Text>
+		<Text character="Owner">Do you remember what car number you were in Sweetie?</Text>
+		<Text character="Mary">I think it was number six... or seven.</Text>
+		<Dialog>
+			<Choice choice="Go fix it" hoursMod="4">
+				<Text character="Owner">Okay Sweetie, I’ll go see if I can fix it. Thank you for telling me.</Text>
+				<Text character="Mary">You’re welcome, Daddy.</Text>
+			</Choice>
+			<Choice choice="Stop using that car" hoursMod="2">
+				<Text character="Owner">Okay, I’ll go make sure no one gets in that car. Thank you for telling me, Sweetie.</Text>
+				<Text character="Mary">You’re welcome, Daddy.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+	
+	<Task id="SELL TICKETS 1" predecessor="" location="rides" hours="">
+		<Text character="Attendant">Hey Boss, can you help me with selling the tickets to the rides?  We’re getting hit hard.</Text>
+		<Dialog>
+			<Choice choice="Yes, I'll help" hoursMod="2">
+				<Text character="Owner">Yep, I can help.</Text>
+				<Text character="Attendant">Thanks Boss!</Text>
+			</Choice>
+			<Choice choice="No, I have other things to do" hoursMod="1">
+				<Text character="Owner">Sorry, I need to head into town and resupply the games and food.</Text>
+				<Text character="Attendant">Okay, I’ll try to make do.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+	
+	<Task id="SELL TICKETS 2" predecessor="" location="rides" hours="">
+		<Text character="Mary">Daddy, the ticket lines are too long!</Text>
+		<Text character="Owner">Which ticket lines?</Text>
+		<Text character="Mary">The ones for the rides.</Text>
+		<Dialog>
+			<Choice choice="I'll go help them" hoursMod="2">
+				<Text character="Owner">Okay Sweetie, I’ll go give them a hand.</Text>
+			</Choice>
+			<Choice choice="Send Joe to help them" hoursMod="1">
+				<Text character="Owner">All right Sweetie, I’ll send Joe to sell tickets.</Text>
 			</Choice>
 		</Dialog>
 	</Task>
