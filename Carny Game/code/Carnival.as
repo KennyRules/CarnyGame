@@ -4,6 +4,7 @@
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
+	import flash.filters.GlowFilter;
 	import code.DailyReport;
 	
 	/**
@@ -41,10 +42,17 @@
 			quadrants.push(Entertainment);
 			quadrants.push(Games);
 			
+			this.setChildIndex(Rides, this.numChildren - 1);
 			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
 			
+			
 			for (var i:int = 0; i < quadrants.length; ++i)
+			{
 				quadrants[i].addEventListener(MouseEvent.CLICK, onQuadrantSelect);
+				quadrants[i].addEventListener(MouseEvent.MOUSE_OVER, onQuadrantMoveOver);
+				quadrants[i].addEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
+				removeGlow(quadrants[i]);
+			}
 				
 			_btnHire = new Sprite();
 			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
@@ -55,6 +63,16 @@
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 			updateInfo();
+		}
+		
+		private function onQuadrantMoveOver(e:MouseEvent):void
+		{
+			addGlow(e.currentTarget as MovieClip);
+		}
+		
+		private function onQuadrantMoveOff(e:MouseEvent):void
+		{
+			removeGlow(e.target as MovieClip);
 		}
 		
 		private function onStageAdd(e:Event):void
@@ -96,7 +114,8 @@
 		
 		private function updateInfo():void
 		{
-			txtHoursLeft.text = "Hours Left: " + _hoursLeft;
+			carnivalUI.txtHoursLeft.text = _hoursLeft;
+			carnivalUI.txtWealth.text = player.wealth;
 		}
 		
 		private function onBackClick(e:MouseEvent):void
@@ -112,6 +131,23 @@
 			btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
 			for (var i:int = 0; i < quadrants.length; ++i)
 				quadrants[i].removeEventListener(MouseEvent.CLICK, onQuadrantSelect);
+		}
+		
+		private function addGlow(aMC:MovieClip):void
+		{
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0xffff00;
+			glow.alpha = 1;
+			glow.blurX = 25;
+			glow.blurY = 25;
+			aMC.filters = [glow];
+			aMC.alpha = 1;
+		}
+		
+		private function removeGlow(aMC:MovieClip):void
+		{
+			aMC.filters = [];
+			aMC.alpha = 0;
 		}
 	}
 }

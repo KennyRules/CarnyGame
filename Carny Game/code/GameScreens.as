@@ -58,7 +58,7 @@
 			switch (e.currentTarget.name)
 			{
 				case "btnStartGame":
-					theDoc.clearScreen();
+					//theDoc.clearScreen();
 					changeLocation("World Map");
 					break;
 			}

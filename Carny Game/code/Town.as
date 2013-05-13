@@ -32,14 +32,14 @@
 			_wealth = aWealth;
 			_employmentRate = aEmployRate;
 			_visited = false;
-			visitedFlag.visible = false;
 			_player = worldMap.player;
+			this.gotoAndStop(2);
 		}
 		
 		public function visitTown():void
 		{
 			_visited = true;
-			visitedFlag.visible = true;
+			this.gotoAndStop(1);
 		}
 	}
 }

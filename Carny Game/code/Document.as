@@ -49,6 +49,7 @@
 			{
 				introMC.stop();
 				startGame();
+				introMC.removeEventListener(Event.ENTER_FRAME, onIntroEnterFrame);
 			}
 		}
 		

@@ -4,6 +4,8 @@
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.text.Font;
+	import flash.text.TextFormat;
 	
 	public class HireScreen extends Sprite 
 	{
@@ -62,6 +64,9 @@
 				var aTextField:TextField = new TextField();
 				aTextField.width = stage.stageWidth / 2;
 				aTextField.text = "Name: " + _potentialEmployees[i].employeeName + ", Salary: " + _potentialEmployees[i].salary.toString();
+				
+				var aFont = new EdmondsansFont().fontName;
+				aTextField.setTextFormat(new TextFormat(aFont, 20));
 				aButton.addChild(aTextField);
 				
 				addChild(aButton);
