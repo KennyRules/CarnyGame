@@ -26,7 +26,7 @@
 		</Dialog>
 	</Task>
 	
-	<Task id="FROG RIDE" predecessor="" location="rides" hours=""> 
+	<Task id="FROG RIDE" predecessor="" location="Rides" hours=""> 
 		<Text character="Helga">Hey Boss! Look at this mud on my shoe! Now how are supposed to expect crowds if you have so many beefs?</Text>
 		<Text character="Owner">Beefs?! What beefs, the season hasn’t even started yet!</Text>
 		<Text character="Helga">Yea, but the coyboys have started entering and ruining this place up!</Text>
@@ -60,7 +60,7 @@
 		</Dialog>
 	</Task>
 	
-	<Task id="RIDES INSPECTION 1" predecessor="" location="rides" hours="">
+	<Task id="RIDES INSPECTION 1" predecessor="" location="Rides" hours="">
 		<Text character="Owner">Hey Scotty, when was the last time the rides inspected?</Text>
 		<Text character="Scotty">Last night during closing I believe.</Text>
 		<Dialog>
@@ -79,7 +79,7 @@
 		</Dialog>
 	</Task>
 	
-	<Task id="RIDES INSPECTION 2" predecessor="" location="rides" hours="">
+	<Task id="RIDES INSPECTION 2" predecessor="" location="Rides" hours="">
 		<Text character="Helga">Hey Boss, do you have a minute?</Text>
 		<Dialog>
 			<Choice choice="No" hoursMod="3">
@@ -99,7 +99,7 @@
 		</Dialog>
 	</Task>
 	
-	<Task id="REPAIR RIDE" predecessor="" location="rides" hours="">
+	<Task id="REPAIR RIDE" predecessor="" location="Rides" hours="">
 		<Text character="Mary">Daddy, I just took a ride on the Ferris wheel and the door on the car wouldn’t close all the way.</Text>
 		<Text character="Owner">Do you remember what car number you were in Sweetie?</Text>
 		<Text character="Mary">I think it was number six... or seven.</Text>
@@ -115,7 +115,7 @@
 		</Dialog>
 	</Task>
 	
-	<Task id="SELL TICKETS 1" predecessor="" location="rides" hours="">
+	<Task id="SELL TICKETS 1" predecessor="" location="Rides" hours="">
 		<Text character="Attendant">Hey Boss, can you help me with selling the tickets to the rides?  We’re getting hit hard.</Text>
 		<Dialog>
 			<Choice choice="Yes, I'll help" hoursMod="2">
@@ -129,7 +129,7 @@
 		</Dialog>
 	</Task>
 	
-	<Task id="SELL TICKETS 2" predecessor="" location="rides" hours="">
+	<Task id="SELL TICKETS 2" predecessor="" location="Rides" hours="">
 		<Text character="Mary">Daddy, the ticket lines are too long!</Text>
 		<Text character="Owner">Which ticket lines?</Text>
 		<Text character="Mary">The ones for the rides.</Text>

@@ -91,6 +91,8 @@
 				 
 			}
 			
+			//load task here
+			
 			_hoursLeft -= Math.random() * 3;
 			if (_hoursLeft <= 0)
 			{

@@ -11,6 +11,7 @@
 	public class Document extends MovieClip
 	{
 		private var gameScreenManager:GameScreens;
+		private var tasks:Task;
 		private var _overlay:Overlay;
 		
 		private var _player:Player;
@@ -28,7 +29,7 @@
 			
 			//startGame();
 			
-			
+			tasks = new Task("Tasks.xml");
 			introLoader = new ForcibleLoader(new Loader());
 			var url:URLRequest = new URLRequest("IntroAnimation.swf"); 
 			introLoader.load(url);   
@@ -85,8 +86,8 @@
 		
 		private function testTask():void
 		{
-			var testTask:Task = new Task();
-			//testTask.loadXML("TestXML.xml");
+			tasks.loadXML("TUTORIAL");
+			
 		}
 		
 		public function clearScreen():void

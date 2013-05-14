@@ -11,25 +11,29 @@
 	public class Task extends MovieClip
 	{
 		protected var baseTime:int; //a base amount of time that the task will take, measured in hours
+		protected var currentTask:String;
+		protected var xmlFile:String;
 		protected var taskXML:XMLList;
 		protected var xmlLoader:URLLoader;
 		
-		private var _doc:Document;
+		//private var _doc:Document;
 		private var _currentXML:XMLList;
 		private var _currentIndex:int;
 		private var _gameTextBox:GameTextBox;
 		private var _gameDialogBox:GameDialogBox;
 		
-		public function Task()
+		public function Task(fileName:String)
 		{
 			baseTime = 0; //will be set by xml
 			xmlLoader = new URLLoader();
+			xmlFile = fileName;
 		}
 		
 		//load up an XML file that contains information about the task and dialogue
 		//this can be overwritten in subclasses
-		public function loadXML(xmlFile:String):void
+		public function loadXML(taskName:String):void
 		{
+			currentTask = taskName;
 			xmlLoader.load(new URLRequest(xmlFile));
 			xmlLoader.addEventListener(Event.COMPLETE, processXML);
 			xmlLoader.addEventListener(IOErrorEvent.IO_ERROR, onLoadingError);
@@ -38,7 +42,7 @@
 		private function processXML(e:Event):void
 		{
 			taskXML = new XMLList(e.target.data);
-			loadXMLSection();
+			loadXMLSection(currentTask);
 		}
 		
 		private function onLoadingError(e:Event):void
@@ -46,13 +50,15 @@
 			trace("XML file did not load correctly"); 
 		}
 		
-		private function loadXMLSection():void
+		private function loadXMLSection(id:String):void
 		{
 			_currentXML = null;
 			_currentIndex = 0;
 			for each (var xmlPiece:XML in taskXML.child("Task"))
 			{
-				_currentXML = XMLList(xmlPiece);
+				//only load the task we need, can be identified by id attribute of task
+				//if (taskXML.Task.@id == id)
+					_currentXML = XMLList(xmlPiece);
 			}
 
 			if (_currentXML != null)
@@ -172,10 +178,6 @@
 			//TODO: add functionality to when what happens after a task
 		}
 		
-		public function loadEnvironment(env:String):void
-		{
-			//TODO: bring up the environment needed, should probably be moved to GameScreens or Document
-		}
 		
 		//variable amounts of time for the task
 		public function actualTime():int
