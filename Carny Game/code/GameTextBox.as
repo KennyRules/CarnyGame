@@ -17,7 +17,7 @@
 	{
 		private var _textSpeed:Number = 0; // How fast a character displays, in milliseconds. 0 = instant.
 		private var _textField:TextField;
-		private var _textFormat:TextFormat = new TextFormat("Arial", 20, 0x000000, null, null, null, null, null, null, null, null, null, 5); // Font, Size, color, leading are set.
+		private var _textFormat:TextFormat = new TextFormat(new EdmondsansFont().fontName, 20, 0x000000, null, null, null, null, null, null, null, null, null, 5); // Font, Size, color, leading are set.
 		private var _textFieldTimer:Timer;
 		private var _textHeight:int = 0;
 		

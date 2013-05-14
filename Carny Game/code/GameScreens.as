@@ -36,10 +36,12 @@
 		private var _currentIndex:int = 0;
 
 		private var _pathRoom:int = 1;
+		private var _task:Task;
 		
-		public function GameScreens(aDoc:Document) 
+		public function GameScreens(aDoc:Document, aTask:Task) 
 		{
 			theDoc = aDoc;
+			_task = aTask;
 			_player = theDoc.player;
 			screens = new Array();
 			
@@ -48,8 +50,6 @@
 			
 			changeLocation("Main Menu");
 			btnStartGame.addEventListener(MouseEvent.CLICK, onMouseClick);
-			var textUrlLoader:URLLoader = new URLLoader(new URLRequest("OverworldText.xml"));
-			textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
 		}
 		
 		private function onMouseClick(e:MouseEvent)
@@ -60,6 +60,7 @@
 				case "btnStartGame":
 					//theDoc.clearScreen();
 					changeLocation("World Map");
+					_task.loadXML("TUTORIAL 1");
 					break;
 			}
 			if (e.currentTarget is Town)
@@ -95,7 +96,7 @@
 					break;
 					
 				case "Overhead Carnival":
-					carnival = new Carnival(worldMap.currentTown);
+					carnival = new Carnival(worldMap.currentTown, _task);
 						
 					addChild(carnival);
 			}

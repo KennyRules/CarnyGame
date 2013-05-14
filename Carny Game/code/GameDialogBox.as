@@ -1,4 +1,4 @@
-package code 
+﻿package code 
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -14,7 +14,7 @@ package code
 	{
 		private var _choices:Array;
 		private var _textFields:Array;
-		private var _textFormat:TextFormat = new TextFormat("Arial", 20, 0x000000, null, null, null, null, null, "center", null, null, null, 5); // Font, Size, color, leading are set.
+		private var _textFormat:TextFormat = new TextFormat(new EdmondsansFont().fontName, 20, 0x000000, null, null, null, null, null, "center", null, null, null, 5); // Font, Size, color, leading are set.
 		
 		public function GameDialogBox(aChoiceArray:Array) 
 		{

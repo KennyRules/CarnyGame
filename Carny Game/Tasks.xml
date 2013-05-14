@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
-	<Task id="TUTORIAL" predecessor="" location="" hours="">
+	<Task id="TUTORIAL 1" predecessor="" location="" hours="">
 		<Text character="">Hello! Welcome to the Leaping Carnival! In this game you will play the role of the owner of a traveilng carnival!</Text>
 		<Text character="">Would you like to see the tutorial?</Text>
 		<Dialog>
@@ -10,15 +10,6 @@
 				<Text character="">The year is 1930 and the economy is in trouble. People need some escape from their own hardships and that is where you come in!</Text> 
 				<Text character="">You have been given a season to make a name for yourself in the carnival business.</Text> 
 				<Text character="">Select a town to gather some info about it and click ‘travel’ to head out!</Text>
-				<Text character="">This is your carnival. As the owner, your day will be filled with various tasks that need completing, from attracting customers to tidying up the attractions.</Text>
-				<Text character="">However, you only have 10 hours of operation to complete tasks in! When there is a task that needs doing, an icon will appear over that section of the carnival.</Text>
-				<Text character="">Select that quadrant to determine what needs doing and an estimate on how long it will take.</Text>
-				<Text character="">At the end of the day, you will receive a report for the expenses and profits of the day.</Text>
-				<Text character="">Your employees require compensation and will individually generate profit for you each day. </Text>
-				<Text character="">Additionally, the carnival does require overall maintenance that changes from day to day.</Text>
-				<Text character="">If you feel an employee is doing nothing but burning a hole in your pocket, you can use this screen to fire an employee by clicking the red x and confirming the fire.</Text>
-				<Text character="">Every day, you can hire local workers to come work for your carnival. Click the ‘hire’ button at the top to see who is available and a brief rundown of their capabilities.</Text>
-				<Text character="">Well that's it for the tutorial. Best of luck in managing your carnival!</Text>
 			</Choice>
 			<Choice choice="No" hoursMod="">
 				<Text character="">Alright, best of luck to ya!</Text>
@@ -26,6 +17,18 @@
 		</Dialog>
 	</Task>
 	
+	<Task id="TUTORIAL 2" predecessor="TUTORIAL 1" location="" hours="">
+		<Text character="">This is your carnival. As the owner, your day will be filled with various tasks that need completing, from attracting customers to tidying up the attractions.</Text>
+		<Text character="">However, you only have 10 hours of operation to complete tasks in! When there is a task that needs doing, an icon will appear over that section of the carnival.</Text>
+		<Text character="">Select that quadrant to determine what needs doing and an estimate on how long it will take.</Text>
+		<Text character="">At the end of the day, you will receive a report for the expenses and profits of the day.</Text>
+		<Text character="">Your employees require compensation and will individually generate profit for you each day. </Text>
+		<Text character="">Additionally, the carnival does require overall maintenance that changes from day to day.</Text>
+		<Text character="">If you feel an employee is doing nothing but burning a hole in your pocket, you can use the daily report to fire an employee by clicking the red x and confirming the fire.</Text>
+		<Text character="">Every day, you can hire local workers to come work for your carnival. Click the ‘hire’ button at the top to see who is available and a brief rundown of their capabilities.</Text>
+		<Text character="">Well that's it for the tutorial. Best of luck in managing your carnival!</Text>
+	</Task>
+				
 	<Task id="FROG RIDE" predecessor="" location="Rides" hours=""> 
 		<Text character="Helga">Hey Boss! Look at this mud on my shoe! Now how are supposed to expect crowds if you have so many beefs?</Text>
 		<Text character="Owner">Beefs?! What beefs, the season hasn’t even started yet!</Text>

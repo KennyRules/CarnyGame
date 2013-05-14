@@ -30,11 +30,14 @@
 		
 		private var _btnHire:Sprite;
 		private var _hireScreen:HireScreen;
+		private var _task:Task;
 		
-		public function Carnival(aTown:Town) 
+		public function Carnival(aTown:Town, aTask:Task) 
 		{
 			this.gotoAndStop("Carnival");
 			town = aTown;
+			_task = aTask;
+			
 			_player = town.player;
 			_hoursLeft = MAX_HOURS;
 			quadrants = new Array();
@@ -108,6 +111,9 @@
 			_hireScreen = new HireScreen(this);
 			addChild(_hireScreen);
 			_hireScreen.visible = false;
+			
+			if (!_task.wasTaskCompleted("TUTORIAL 2"))
+				_task.loadXML("TUTORIAL 2");
 		}
 		
 		private function onHireClick(e:MouseEvent):void

@@ -7,6 +7,7 @@
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.xml.*;
+	import flash.utils.Dictionary;
 	
 	public class Task extends MovieClip
 	{
@@ -22,11 +23,16 @@
 		private var _gameTextBox:GameTextBox;
 		private var _gameDialogBox:GameDialogBox;
 		
+		private var _taskDictionary:Dictionary; // Stores the xml pieces, key is id of task.
+		private var _completedTasks:Dictionary;	// Returns true if given task was completed.
+		
 		public function Task(fileName:String)
 		{
 			baseTime = 0; //will be set by xml
 			xmlLoader = new URLLoader();
 			xmlFile = fileName;
+			_taskDictionary = new Dictionary();
+			_completedTasks = new Dictionary();
 		}
 		
 		//load up an XML file that contains information about the task and dialogue
@@ -42,6 +48,11 @@
 		private function processXML(e:Event):void
 		{
 			taskXML = new XMLList(e.target.data);
+			for each (var xmlPiece:XML in taskXML.child("Task"))
+			{
+				_taskDictionary[xmlPiece.@id.toString()] = XMLList(xmlPiece);
+				_completedTasks[xmlPiece.@id.toString()] = false;
+			}
 			loadXMLSection(currentTask);
 		}
 		
@@ -54,13 +65,15 @@
 		{
 			_currentXML = null;
 			_currentIndex = 0;
+			/*
 			for each (var xmlPiece:XML in taskXML.child("Task"))
 			{
 				//only load the task we need, can be identified by id attribute of task
-				//if (taskXML.Task.@id == id)
+				if (xmlPiece.@id == id)
 					_currentXML = XMLList(xmlPiece);
 			}
-
+			*/
+			_currentXML = _taskDictionary[id];
 			if (_currentXML != null)
 			{
 				_gameTextBox = new GameTextBox(_currentXML.Text[_currentIndex]);
@@ -173,8 +186,10 @@
 			this.addEventListener(MouseEvent.CLICK, onTaskEnd);
 		}
 		
-		private function onTaskEnd():void
+		private function onTaskEnd(e:MouseEvent):void
 		{
+			// Set the completed flag to true.
+			_completedTasks[_currentXML.@id.toString()] = true;
 			//TODO: add functionality to when what happens after a task
 		}
 		
@@ -185,6 +200,11 @@
 			//for basic variation just do random number and add it, have range of negative numbers
 			var incrementer:int = Math.random() * 10 - 5;
 			return incrementer;
+		}
+		
+		public function wasTaskCompleted(aTask:String):Boolean
+		{
+			return _completedTasks[aTask];
 		}
 	}
 }

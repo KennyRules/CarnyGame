@@ -32,8 +32,9 @@
 			tasks = new Task("Tasks.xml");
 			introLoader = new ForcibleLoader(new Loader());
 			var url:URLRequest = new URLRequest("IntroAnimation.swf"); 
-			introLoader.load(url);   
-			introLoader.loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onIntroLoadComplete);
+			startGame();
+			//introLoader.load(url);   
+			//introLoader.loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onIntroLoadComplete);
 		}
 		
 		private function onIntroLoadComplete(e:Event):void 
@@ -73,7 +74,7 @@
 		
 		private function initOverworld():void
 		{
-			gameScreenManager = new GameScreens(this);
+			gameScreenManager = new GameScreens(this, tasks);
 			addChild(gameScreenManager);
 		}
 		
@@ -86,8 +87,7 @@
 		
 		private function testTask():void
 		{
-			tasks.loadXML("TUTORIAL");
-			
+			addChild(tasks);
 		}
 		
 		public function clearScreen():void
