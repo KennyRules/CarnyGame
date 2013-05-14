@@ -25,6 +25,7 @@
 		
 		private var _taskDictionary:Dictionary; // Stores the xml pieces, key is id of task.
 		private var _completedTasks:Dictionary;	// Returns true if given task was completed.
+		private var _characters:Characters;
 		
 		public function Task(fileName:String)
 		{
@@ -33,6 +34,9 @@
 			xmlFile = fileName;
 			_taskDictionary = new Dictionary();
 			_completedTasks = new Dictionary();
+			_characters = new Characters();
+			_characters.gotoAndStop("None");
+			addChild(_characters);
 		}
 		
 		//load up an XML file that contains information about the task and dialogue
@@ -65,6 +69,7 @@
 		{
 			_currentXML = null;
 			_currentIndex = 0;
+			currentTask = id;
 			/*
 			for each (var xmlPiece:XML in taskXML.child("Task"))
 			{
@@ -77,7 +82,11 @@
 			if (_currentXML != null)
 			{
 				_gameTextBox = new GameTextBox(_currentXML.Text[_currentIndex]);
+				
 				addChild(_gameTextBox);
+					
+				// Shows the character in the character attirbute.
+				changeCharacter(_currentXML.children()[_currentIndex].@character.toString());
 				_gameTextBox.addEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 			}
 		}
@@ -101,6 +110,7 @@
 				var nodeName:String = _currentXML.child(_currentIndex).name();
 				if (nodeName == "Text")
 				{
+					changeCharacter(_currentXML.children()[_currentIndex].@character.toString());
 					_gameTextBox.loadMessage(_currentXML.children()[_currentIndex]);
 				}
 				// If it is a Dialog node, make this node the new current node to generate messages from.
@@ -173,9 +183,14 @@
 
 				}
 			}
+			
+			if(currentTask == "TUTORIAL 1" && e.dialogSelected == 1)
+				skipTutorial();
+			
 			_currentIndex = 0;
 			_currentXML = XMLList(_currentXML[e.dialogSelected]);
 			_gameTextBox.loadMessage(_currentXML.Text[_currentIndex]);
+			changeCharacter(_currentXML.children()[_currentIndex].@character.toString());
 			_gameTextBox.addEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 		}
 		
@@ -183,6 +198,7 @@
 		{
 			_gameTextBox.removeEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 			removeChild(_gameTextBox);
+			_characters.gotoAndStop("None");
 			this.addEventListener(MouseEvent.CLICK, onTaskEnd);
 		}
 		
@@ -205,6 +221,20 @@
 		public function wasTaskCompleted(aTask:String):Boolean
 		{
 			return _completedTasks[aTask];
+		}
+		
+		public function skipTutorial():void
+		{
+			_completedTasks["TUTORIAL 1"] = true;
+			_completedTasks["TUTORIAL 2"] = true;
+		}
+		
+		private function changeCharacter(aCharacter:String):void
+		{
+			trace(aCharacter);
+			_characters.gotoAndStop(aCharacter);
+			_characters.x = stage.stageWidth / 2 - _characters.width / 2;
+			_characters.y = stage.stageHeight - _gameTextBox.height - _characters.height;
 		}
 	}
 }

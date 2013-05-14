@@ -91,7 +91,11 @@
 				
 			switch (e.currentTarget.name)
 			{
-				 
+				 case "Rides":
+				 {
+				 	_task.loadXML("FROG RIDE");
+				 	break;
+				 }
 			}
 			
 			//load task here
