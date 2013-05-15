@@ -274,4 +274,64 @@
 		<!--Waiting to implement this one because it has a female customer. Do we have art for that? Also I guess I will have to specify male or female customer-/->
 	</Task>
 	-->
+	
+	<Task id="RIGGED FIGHTS" predecessor="" location="Entertainment">
+		<Text character="Bull">Hello sir, I have a business proposition for you.</Text>
+		<Text character="Owner">Is that so? What is it that you wish to propose?</Text>
+		<Text character="Bull">Let my boy, William fight one of your guys.  If you let William win, I’ll give you 60% of the bets placed on your boy.</Text>
+		<Dialog>
+			<Choice choice="Rig the fight" hoursMod="3">
+				<Text character="Owner">Sounds like an interesting proposition.  Let me talk to a few of my boys and see if any would like to take the challenge.</Text>
+				<Text character="None">You return 30 minutes later</Text>
+				<Text character="Owner">Ray said he is willing to fight William.  Let's see what the crowd thinks.</Text>
+			</Choice>
+			<Choice choice="Don't rig the fight" hoursMod="3">
+				<Text character="Owner">I'd rather not rig the fight.  But I'll let William fight Ray.  William just has to earn his win.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+	
+	<Task id="CUSTOMER WINNINGS" predecessor="" location="Entertainment">
+		<Text character="Customer">Hey, boss man, I got to talk to you.</Text>
+		<Text character="Owner">All right, what is going on?</Text>
+		<Text character="Customer">I won a fight at the arena last night, but still have not gotten paid.</Text>
+		<Choice choice="Give him the money" hoursMod="1">
+			<Text character="Owner">Okay, well here is your money.</Text>
+		</Choice>
+		<Choice choice="Go talk to the Athletics tent" hoursMod="2">
+			<Text character="Owner">Alright, let me go check at the Athletics tent and see why you haven’t been paid.</Text>
+			<Text character="None">15 minutes later</Text>
+			<Text character="Owner">Okay, so according to the guys at the tent, you were supposed go pick up at closing.  Anyway, here is your winnings.</Text>
+		</Choice>
+	</Task>
+	
+	<Task id="REPAIR TENT" predecessor="" location="Entertainment">
+		<Text character="None">A loud commotion occurs at Tessa's tent</Text>
+		<Text character="Owner">What is going on here?</Text>
+		<Text character="Tessa">Inkari scared a child.  The child screamed then ran through the side of my tent.</Text>
+		<Text character="Owner">How much damage is it?</Text>
+		<Text character="Tessa">The whole back got ripped down.</Text>
+		<Choice choice="Fix the tent" hoursMod="2">
+			<Text character="Owner">Okay, I’ll go find some rope to put it back up.</Text>
+			<Text character="Tessa">Thank you, I’ll go work the arch until it’s fixed.</Text>
+		</Choice>
+		<Choice choice="Leave it be" hoursMod="4">
+			<Text character="Owner">Well, since it is in the back, we do not need to worry too much on it.</Text>
+			<Text character="Tessa">But what if the customers get in for free?</Text>
+			<Text character="Owner">I do not think we have to worry about that.</Text>
+			<Text character="None"></Text>
+		</Choice>
+	</Task>
+	
+	<Task id="HELGA FIGHTS WITH SCOTTY" predecessor="" location="Entertainment">
+		
+	</Task>
+	
+	<Task id="HELGA FIGHTS WITH TESSA" predecessor="" location="Entertainment">
+		
+	</Task>
+	
+	<Task id="SELL TICKETS 3" predecessor="" location="Entertainment">
+		
+	</Task>
 </data>
