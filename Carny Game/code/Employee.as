@@ -22,7 +22,7 @@
 		public function generateProfit():Number
 		{
 			// TO-DO: Determine how much money an employee makes. Probably need extra parameters and/or using town/carnival.
-			_profit = Math.random() * 200;
+			_profit = int((Math.random() * 200)*100)/100;
 			return _profit;
 		}
 	}

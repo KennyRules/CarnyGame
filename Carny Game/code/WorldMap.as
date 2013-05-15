@@ -263,7 +263,7 @@
 		
 		private function initTowns():void
 		{
-			var aTown:Town = new Town(this, "Nebraska Far Left", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			var aTown:Town = new Town(this, "Nebraska Far Left", Math.round(Math.random() * 2000 + 500), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 111;
 			aTown.y = 122;
 			addChild(aTown);

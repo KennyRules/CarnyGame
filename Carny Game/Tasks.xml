@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <data>
 	<Task id="TUTORIAL 1" predecessor="" location="">
-		<Text character="None">Hello! Welcome to the Leaping Carnival! In this game you will play the role of the owner of a traveilng carnival!</Text>
+		<Text character="None">Hello! Welcome to the Leaping Carnival! In this game you will play the role of the owner of a traveling carnival!</Text>
 		<Text character="None">Would you like to see the tutorial?</Text>
 		<Dialog>
 			<Choice choice="Yes" hoursMod="">
 				<Text character="None">Great! Let's get started.</Text>
 				<Text character="None">Here is the map. You can travel to various cities, bringing amusement to them and profit to you.</Text> 
-				<Text character="None">The year is 1930 and the economy is in trouble. People need some escape from their own hardships and that is where you come in!</Text> 
+				<Text character="None">The year is 1934 and the economy is in trouble. People need some escape from their own hardships and that is where you come in!</Text> 
 				<Text character="None">You have been given a season to make a name for yourself in the carnival business.</Text> 
 				<Text character="None">Select a town to gather some info about it and click ‘travel’ to head out!</Text>
 			</Choice>
@@ -32,7 +32,7 @@
 	<Task id="FROG RIDE" predecessor="" location="Rides"> 
 		<Text character="Helga">Hey Boss! Look at this mud on my shoe! Now how are supposed to expect crowds if you have so many beefs?</Text>
 		<Text character="Owner">Beefs?! What beefs, the season hasn’t even started yet!</Text>
-		<Text character="Helga">Yea, but the coyboys have started entering and ruining this place up!</Text>
+		<Text character="Helga">Yea, but the cowboys have started entering and ruining this place up!</Text>
 		<Text character="Owner">*Sigh*...Now what did they do?</Text>
 		<Text character="Helga">These cowboys came riding in with bats and started knocking off the ears of the rabbit on the carousel.</Text>
 		<Dialog>
