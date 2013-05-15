@@ -33,13 +33,13 @@
 		
 		private function initEmployees():void
 		{
-			var aEmployee:Employee = new Employee("Bob", 100);
+			var aEmployee:Employee = new Employee("Bob", 4.00);
 			_potentialEmployees.push(aEmployee);
 			
-			aEmployee = new Employee("Jeff", 50);
+			aEmployee = new Employee("Jeff", 3.50);
 			_potentialEmployees.push(aEmployee);
 			
-			aEmployee = new Employee("Mark", 150);
+			aEmployee = new Employee("Mark", 5.50);
 			_potentialEmployees.push(aEmployee);
 		}
 		

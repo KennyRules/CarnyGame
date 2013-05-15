@@ -46,6 +46,9 @@
 			setDay();
 			setIncome();
 			setEmployees();
+			setProfit();
+			
+			_player.setprevWealth(_player.wealth);
 			
 			exitBtn.addEventListener(MouseEvent.CLICK, onExitClick);
 		}
@@ -62,6 +65,11 @@
 			textbox_money.text = "Money: $" + _player.wealth;
 		}
 		
+		private function setProfit()
+		{
+			textbox_day.text = "Net Income: " + (_player.wealth - _player.prevWealth);
+		}
+		
 		//  Display our list of employees
 		private function setEmployees()
 		{
@@ -74,7 +82,7 @@
 				tf.height = _boxHeight;				// set the textfield height
 				tf.width = 300;
 								
-				tf.text = _player.employees[i].employeeName + "Profit: " + _player.employees[i].profit;	// set the name of the employee
+				tf.text = _player.employees[i].employeeName + "       Profit: " + _player.employees[i].profit;	// set the name of the employee
 				addChild(tf);									// add to the scene
 				_employee_textfields.push(tf);					// add to the array
 				
