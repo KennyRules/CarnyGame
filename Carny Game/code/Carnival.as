@@ -6,6 +6,8 @@
 	import flash.events.Event;
 	import flash.filters.GlowFilter;
 	import code.DailyReport;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	/**
 	 * ...
@@ -53,9 +55,11 @@
 			
 			_btnHire = new Sprite();
 			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
-			_btnHire.graphics.beginFill(0xFF0000, 1.0);
-			_btnHire.graphics.drawRect(0, 0, 50, 50);
-			
+			_btnHire.graphics.beginFill(0x443F35, 1.0);
+			_btnHire.graphics.drawRect(0, 0, 60, 30);
+			_btnHire.addChild(new TextField());
+			(_btnHire.getChildAt(0) as TextField).text = "HIRE";
+			(_btnHire.getChildAt(0) as TextField).setTextFormat(new TextFormat(new EdmondsansFont().fontName, 22));
 			addChild(_btnHire);
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
@@ -104,9 +108,16 @@
 				 case "Rides":
 				 {
 					 btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
-				 	_task.loadXML("FROG RIDE");
+				 	_task.loadXMLSection("FROG RIDE");
 					_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onSectionComplete);
 				 	break;
+				 }
+				 case "Arch":
+				 {
+					btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
+					_task.loadXMLSection("CALLING ENTERTAINMENT");
+					_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onSectionComplete);
+					break;
 				 }
 			}
 			
@@ -129,6 +140,7 @@
 			if (!_task.wasTaskCompleted("TUTORIAL 2"))
 			{
 				_task.loadXML("TUTORIAL 2");
+				_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onTutorialComplete);
 			}
 			else
 			{
@@ -174,6 +186,11 @@
 		private function onSectionComplete(e:MessageEvent):void
 		{
 			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
+		}
+		
+		private function onTutorialComplete(e:MessageEvent):void
+		{
+			addDefaultEventListeners();
 		}
 		
 		private function clearEvents():void

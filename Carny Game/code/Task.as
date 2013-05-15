@@ -65,7 +65,7 @@
 			trace("XML file did not load correctly"); 
 		}
 		
-		private function loadXMLSection(id:String):void
+		public function loadXMLSection(id:String):void
 		{
 			_currentXML = null;
 			_currentIndex = 0;

@@ -147,7 +147,7 @@
 	</Task>
 
 	<Task id="CALLING ENTERTAINMENT" predecessor="" location="Arch">
-		<Text charater="Tessa">Things don't seem to be going so well here. Can I bring Mary in to help try to bring in some more kids?</Text>
+		<Text character="Tessa">Things don't seem to be going so well here. Can I bring Mary in to help try to bring in some more kids?</Text>
 		<Text character="Mary">Can I please, Daddy?</Text>
 		<Dialog>
 			<Choice choice="Yes, you can help Tessa" hoursMod="2">
