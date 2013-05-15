@@ -20,7 +20,7 @@
 		public function generateProfit(a:int, b:Number, c:Number):Number	// population, hourly wage, employment rate
 		{
 			// TO-DO: Determine how much money an employee makes. Probably need extra parameters and/or using town/carnival.
-			_profit = ((a * c/100) * .01) * c;
+			_profit = int(((((a * c/100) * .05) * b) * (Math.random() *_salary/10 + .3) - _salary)* 100)/100;
 			return _profit;
 		}
 	}
