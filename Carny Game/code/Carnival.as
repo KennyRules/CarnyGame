@@ -197,7 +197,6 @@
 			if (this.currentLabel == "Carnival")
 			{
 				clearEvents();
-				player.getPaid();
 				trace(player.employees.length);
 				_doc.soundLibrary.stopBG_sound();			// STOP THE BG SOUNDS
 				town.worldMap.returnToOverworld();

@@ -22,15 +22,16 @@
 			employees.push(new Employee("Test Employee", 100));
 		}
 		
-		public function getPaid():void
+		public function getPaid(pop:int, hw:Number, er:Number):void	// population, hourly wage, employment rate
 		{
 			var profit:Number = 0;
 			for (var i:uint = 0; i < employees.length; ++i)
 			{
-				profit += (_employees[i].generateProfit() - _employees[i].salary);
+				profit += (_employees[i].generateProfit(pop, hw, er) - _employees[i].salary);
 			}
 			
 			profit *= ((Math.floor(Math.random() * (60 - 30 + 1)) + 30) / 100); 
+			//????????????????
 			_wealth += profit;
 		}
 		

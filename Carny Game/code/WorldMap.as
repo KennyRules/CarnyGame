@@ -263,67 +263,67 @@
 		
 		private function initTowns():void
 		{
-			var aTown:Town = new Town(this, "Nebraska Far Left", Math.round(Math.random() * 2000 + 500), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
+			var aTown:Town = new Town(this, "Nebraska Far Left", Math.round(Math.random() * 3000 + 500), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 111;
 			aTown.y = 122;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Nebraska Far right", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Nebraska Far right", Math.round(Math.random() * 3430 + 536), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 460;
 			aTown.y = 265;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Iowa Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Iowa Top", Math.round(Math.random() * 2500 + 1500), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 520;
 			aTown.y = 105;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Iowa Left", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Iowa Left", Math.round(Math.random() * 3000 + 563), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 560;
 			aTown.y = 200;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Iowa Right", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Iowa Right", Math.round(Math.random() * 3340 + 536), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 796;
 			aTown.y = 188;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Missouri Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Missouri Top", Math.round(Math.random() * 3340 + 534), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 643.5;
 			aTown.y = 325;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Missouri Right", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Missouri Right", Math.round(Math.random() * 2340 + 1490), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 786.5;
 			aTown.y = 412;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Missouri Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Missouri Bottom", Math.round(Math.random() * 3035 + 1334), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 640;
 			aTown.y = 508;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Kansas Right", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Kansas Right", Math.round(Math.random() * 2643 + 732), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 556;
 			aTown.y = 548;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Kansas Bottom", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Kansas Bottom", Math.round(Math.random() * 3340 + 553), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 320;
 			aTown.y = 516;
 			addChild(aTown);
 			towns.push(aTown);
 			
-			aTown = new Town(this, "Kansas Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
+			aTown = new Town(this, "Kansas Top", Math.round(Math.random() * 2230 + 540), int(Math.random() * 50 + 35)/100, Math.round(Math.random() * 4 + 18));
 			aTown.x = 214;
 			aTown.y = 380;
 			

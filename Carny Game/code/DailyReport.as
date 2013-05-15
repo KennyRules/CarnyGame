@@ -40,6 +40,8 @@
 			_boxHeight = 30;
 			_startingY = textbox_title.y + 40;
 			
+			_player.getPaid(_town.population, _town.wealth, _town.employmentRate);
+			
 			// Set up the report menu
 			setDay();
 			setIncome();
@@ -72,7 +74,7 @@
 				tf.height = _boxHeight;				// set the textfield height
 				tf.width = 300;
 								
-				tf.text = _player.employees[i].employeeName + "Profit: " + _player.employees[i].profit_minus_salary();	// set the name of the employee
+				tf.text = _player.employees[i].employeeName + "Profit: " + _player.employees[i].profit;	// set the name of the employee
 				addChild(tf);									// add to the scene
 				_employee_textfields.push(tf);					// add to the array
 				
