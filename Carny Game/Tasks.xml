@@ -74,9 +74,9 @@
 				<Text character="Owner">Okay. They should be fine then. I’ll just give them a good look over tonight.</Text>
 				<Text character="Scotty">If you think they will be alright.</Text>
 				<Text character="None">About 20 minutes later...</Text>
-				<Text character="Customer">Hey, one of the cars on the Ferris wheel is really shaky.</Text>
+				<Text character="Customer 2">Hey, one of the cars on the Ferris wheel is really shaky.</Text>
 				<Text character="Owner">*Sigh*  Alright. I’ll shut it down for maintenance and see if I can get it back up and running soon.</Text>
-				<Text character="Customer">You better if you don't want an accident around here.</Text>
+				<Text character="Customer 2">You better if you don't want an accident around here.</Text>
 				<Text character="Owner">Don't worry, I'll make sure it's safe before anyone else gets on it.</Text>
 			</Choice>
 		</Dialog>
@@ -182,16 +182,16 @@
 		<Dialog>
 			<Choice choice="Yes" hoursMod="2">
 				<Text character="Owner">Yeah, we do. You can redeem them for a drink at one of the food venders or for a ride on the carousel.</Text>
-				<Text character="Customer">Okay, thank you.</Text>
+				<Text character="Customer 3">Okay, thank you.</Text>
 				<Text character="Scotty">Are you sure we aught to be letting people use those here Boss? They don’t have any value to them.</Text>
 				<Text character="Owner">Yeah, if we let people redeem them here, it will help draw in more people.</Text>
 				<Text character="Scotty">Okay, well you are the Boss.</Text>
 			</Choice>
 			<Choice choice="No" hoursMod="3">
 				<Text character="Owner">Sorry, we do not take wooden nickels. We only take real money.</Text>
-				<Text character="Customer">These are depressing times for us all, why not get more crowds in by using wooden nickels?</Text>
+				<Text character="Customer 3">These are depressing times for us all, why not get more crowds in by using wooden nickels?</Text>
 				<Text character="None">The argument continues for an hour</Text>
-				<Text character="Customer">Well, if you do not want good folks like me who are trying our hardest to make a living then, I will just be on my way.</Text>
+				<Text character="Customer 3">Well, if you do not want good folks like me who are trying our hardest to make a living then, I will just be on my way.</Text>
 				<Text character="Owner">You can take your folks with you.</Text>
 				<Text character="Scotty">Boss, don't get so steamed up. I mean why not draw more people here by allowing folks with wooden nickels?</Text>
 				<Text character="Owner">But we would receive no profit by taking them in.</Text>
@@ -252,24 +252,26 @@
 	</Task>
 
 	<Task id="CUSTOMER JOB 1" predecessor="" location="Arch">
-		<Text character="Customer">Hello sir.</Text>
+		<Text character="Customer 1">Hello sir.</Text>
 		<Text character="Owner">Good day, sir.</Text>
-		<Text character="Customer">You wouldn’t happen to  be looking for someone to help out around here, would ya?</Text>
+		<Text character="Customer 1">You wouldn’t happen to  be looking for someone to help out around here, would ya?</Text>
 		<Dialog>
 			<Choice choice="Why yes we are." hoursMod="2">
 				<Text character="Owner">Why yes, we are/ What are you looking to do?</Text>
-				<Text character="Customer">Anything!!</Text>
+				<Text character="Customer 1">Anything!!</Text>
 				<Text character="Owner">Well you look like a strong young man, I’m sure we could use you to help set up and break down the tents.</Text>
-				<Text character="Customer">Thank you! Thank you, sir!</Text>
+				<Text character="Customer 1">Thank you! Thank you, sir!</Text>
 			</Choice>
 			<Choice choice="No sorry, we aren't." predecessor="" location="Arch">
 				<Text character="Owner">Sorry sir, we have no positions available.</Text>
-				<Text character="Customer">Oh. Well, thank you for your time.</Text>
+				<Text character="Customer 1">Oh. Well, thank you for your time.</Text>
 			</Choice>
 		</Dialog>
 	</Task>
 
+	<!--
 	<Task id="CUSTOMER JOB 2" predecessor="" location="Arch">
-		<!--Waiting to implement this one because it has a female customer. Do we have art for that? Also I guess I will have to specify male or female customer-->
+		<!--Waiting to implement this one because it has a female customer. Do we have art for that? Also I guess I will have to specify male or female customer-/->
 	</Task>
+	-->
 </data>

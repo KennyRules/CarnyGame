@@ -202,7 +202,7 @@
 			this.addEventListener(MouseEvent.CLICK, onTaskEnd);
 			
 			// Set the completed flag to true.
-			_completedTasks[_currentXML.@id.toString()] = true;
+			_completedTasks[currentTask] = true;
 			dispatchEvent(new MessageEvent(MessageEvent.ON_SECTION_COMPLETE));
 		}
 		
@@ -236,6 +236,21 @@
 			_characters.gotoAndStop(aCharacter);
 			_characters.x = stage.stageWidth / 2 - _characters.width / 2;
 			_characters.y = stage.stageHeight - _gameTextBox.height - _characters.height;
+		}
+		
+		public function chooseNextTask(aSection:String):Boolean
+		{
+			// TO-DO - predecessor logic.
+			for each (var aXMLPiece:XMLList in _taskDictionary)
+			{
+				if (aSection == aXMLPiece.@location.toString() && _completedTasks[aXMLPiece.@id.toString()] == false)
+				{
+					loadXMLSection(aXMLPiece.@id.toString());
+					return true;
+				}
+			}
+			
+			return false;
 		}
 	}
 }

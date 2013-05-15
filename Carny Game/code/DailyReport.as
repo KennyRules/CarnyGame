@@ -42,6 +42,8 @@
 			setDay();
 			setIncome();
 			setEmployees();
+			
+			exitBtn.addEventListener(MouseEvent.CLICK, onExitClick);
 		}
 		
 		// Will make the title say "End of Day XX"
@@ -107,6 +109,10 @@
 			}
 		}
 		
+		private function onExitClick(e:MouseEvent):void
+		{
+			_carnival.endReport();
+		}
 	}
 	
 }

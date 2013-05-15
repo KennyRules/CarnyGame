@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
-	<Task id="TUTORIAL 1" predecessor="" location="" hours="">
+	<Task id="TUTORIAL 1" predecessor="" location="">
 		<Text character="None">Hello! Welcome to the Leaping Carnival! In this game you will play the role of the owner of a traveilng carnival!</Text>
 		<Text character="None">Would you like to see the tutorial?</Text>
 		<Dialog>
@@ -16,8 +16,8 @@
 			</Choice>
 		</Dialog>
 	</Task>
-	
-	<Task id="TUTORIAL 2" predecessor="TUTORIAL 1" location="" hours="">
+
+	<Task id="TUTORIAL 2" predecessor="TUTORIAL 1" location="">
 		<Text character="None">This is your carnival. As the owner, your day will be filled with various tasks that need completing, from attracting customers to tidying up the attractions.</Text>
 		<Text character="None">However, you only have 10 hours of operation to complete tasks in! When there is a task that needs doing, an icon will appear over that section of the carnival.</Text>
 		<Text character="None">Select that quadrant to determine what needs doing and an estimate on how long it will take.</Text>
@@ -28,8 +28,8 @@
 		<Text character="None">Every day, you can hire local workers to come work for your carnival. Click the ‘hire’ button at the top to see who is available and a brief rundown of their capabilities.</Text>
 		<Text character="None">Well that's it for the tutorial. Best of luck in managing your carnival!</Text>
 	</Task>
-				
-	<Task id="FROG RIDE" predecessor="" location="Rides" hours=""> 
+
+	<Task id="FROG RIDE" predecessor="" location="Rides"> 
 		<Text character="Helga">Hey Boss! Look at this mud on my shoe! Now how are supposed to expect crowds if you have so many beefs?</Text>
 		<Text character="Owner">Beefs?! What beefs, the season hasn’t even started yet!</Text>
 		<Text character="Helga">Yea, but the coyboys have started entering and ruining this place up!</Text>
@@ -62,8 +62,8 @@
 			</Choice>
 		</Dialog>
 	</Task>
-	
-	<Task id="RIDES INSPECTION 1" predecessor="" location="Rides" hours="">
+
+	<Task id="RIDES INSPECTION 1" predecessor="" location="Rides">
 		<Text character="Owner">Hey Scotty, when was the last time the rides inspected?</Text>
 		<Text character="Scotty">Last night during closing I believe.</Text>
 		<Dialog>
@@ -74,15 +74,15 @@
 				<Text character="Owner">Okay. They should be fine then. I’ll just give them a good look over tonight.</Text>
 				<Text character="Scotty">If you think they will be alright.</Text>
 				<Text character="None">About 20 minutes later...</Text>
-				<Text character="Customer">Hey, one of the cars on the Ferris wheel is really shaky.</Text>
+				<Text character="Customer 2">Hey, one of the cars on the Ferris wheel is really shaky.</Text>
 				<Text character="Owner">*Sigh*  Alright. I’ll shut it down for maintenance and see if I can get it back up and running soon.</Text>
-				<Text character="Customer">You better if you don't want an accident around here.</Text>
+				<Text character="Customer 2">You better if you don't want an accident around here.</Text>
 				<Text character="Owner">Don't worry, I'll make sure it's safe before anyone else gets on it.</Text>
 			</Choice>
 		</Dialog>
 	</Task>
-	
-	<Task id="RIDES INSPECTION 2" predecessor="" location="Rides" hours="">
+
+	<Task id="RIDES INSPECTION 2" predecessor="" location="Rides">
 		<Text character="Helga">Hey Boss, do you have a minute?</Text>
 		<Dialog>
 			<Choice choice="No" hoursMod="3">
@@ -101,8 +101,8 @@
 			</Choice>
 		</Dialog>
 	</Task>
-	
-	<Task id="REPAIR RIDE" predecessor="" location="Rides" hours="">
+
+	<Task id="REPAIR RIDE" predecessor="" location="Rides">
 		<Text character="Mary">Daddy, I just took a ride on the Ferris wheel and the door on the car wouldn’t close all the way.</Text>
 		<Text character="Owner">Do you remember what car number you were in Sweetie?</Text>
 		<Text character="Mary">I think it was number six... or seven.</Text>
@@ -117,8 +117,8 @@
 			</Choice>
 		</Dialog>
 	</Task>
-	
-	<Task id="SELL TICKETS 1" predecessor="" location="Rides" hours="">
+
+	<Task id="SELL TICKETS 1" predecessor="" location="Rides">
 		<Text character="Attendant">Hey Boss, can you help me with selling the tickets to the rides?  We’re getting hit hard.</Text>
 		<Dialog>
 			<Choice choice="Yes, I'll help" hoursMod="2">
@@ -131,8 +131,8 @@
 			</Choice>
 		</Dialog>
 	</Task>
-	
-	<Task id="SELL TICKETS 2" predecessor="" location="Rides" hours="">
+
+	<Task id="SELL TICKETS 2" predecessor="" location="Rides">
 		<Text character="Mary">Daddy, the ticket lines are too long!</Text>
 		<Text character="Owner">Which ticket lines?</Text>
 		<Text character="Mary">The ones for the rides.</Text>
@@ -145,4 +145,133 @@
 			</Choice>
 		</Dialog>
 	</Task>
+
+	<Task id="CALLING ENTERTAINMENT" predecessor="" location="Arch">
+		<Text character="Tessa">Things don't seem to be going so well here. Can I bring Mary in to help try to bring in some more kids?</Text>
+		<Text character="Mary">Can I please, Daddy?</Text>
+		<Dialog>
+			<Choice choice="Yes, you can help Tessa" hoursMod="2">
+				<Text character="Owner">Okay, you can help us bring in some more people.</Text>
+				<Text character="Mary">Yay! What do you want me to do?</Text>
+				<Text character="Tessa">How about you head out into the crowd and we will call you out to play with Inkari. Then we will try to get other children to come up to see him.</Text>
+				<Text character="Mary">Okay!</Text>
+				<Text character="None">Mary runs out into the crowd by the arch</Text>
+				<Text character="Owner">Ladies and gentlemen! Children of ALL ages! Come and be amazed by the beautiful Tessa and her snake, Inkari!</Text>
+				<Text character="Tessa">Can I please have someone to come up? I will place Inkari on your shoulders.</Text>
+				<Text character="None">Mary walks towards the front of the crowd</Text>
+				<Text character="Tessa">How about you, young girl? No need to be afraid, Inkari will not bite you.</Text>
+				<Text character="None">Tessa places the snake on Mary shoulders</Text>
+				<Text character="None">Mary walks around the crowd with it, while seeming a little nervous</Text>
+				<Text character="Mary">Can he give me a kiss?</Text>
+				<Text character="None">Tessa helps Mary receive a kiss on the check</Text>
+				<Text character="Tessa">Does anyone want to pet Inkari?</Text>
+			</Choice>
+			<Choice choice="No, I need her to help Joyce at the popcorn stand" hoursMod="2">
+				<Text character="Owner">No, I have heard Joyce needs your help at the popcorn stand.</Text>
+				<Text character="Mary">Ok, daddy. Tessa, I might be able to get done early and come back here.</Text>
+				<Text character="Tessa">Do not worry about that child. You should listen to your father.</Text>
+				<Text character="None">Mary heads off to the food section</Text>
+				<Text character="Owner">Ladies and Gentlemen and Children of ALL ages!  Come and be amazed by the beautiful Tessa and her snake, Inkari.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+
+	<Task id="WOODEN NICKEL" predecessor="" location="Arch">
+		<Text character="None">Scotty walks up with a customer</Text>
+		<Text character="Scotty">Hey Boss, this guy here wants to know if we take wooden nickels.</Text>
+		<Dialog>
+			<Choice choice="Yes" hoursMod="2">
+				<Text character="Owner">Yeah, we do. You can redeem them for a drink at one of the food venders or for a ride on the carousel.</Text>
+				<Text character="Customer 3">Okay, thank you.</Text>
+				<Text character="Scotty">Are you sure we aught to be letting people use those here Boss? They don’t have any value to them.</Text>
+				<Text character="Owner">Yeah, if we let people redeem them here, it will help draw in more people.</Text>
+				<Text character="Scotty">Okay, well you are the Boss.</Text>
+			</Choice>
+			<Choice choice="No" hoursMod="3">
+				<Text character="Owner">Sorry, we do not take wooden nickels. We only take real money.</Text>
+				<Text character="Customer 3">These are depressing times for us all, why not get more crowds in by using wooden nickels?</Text>
+				<Text character="None">The argument continues for an hour</Text>
+				<Text character="Customer 3">Well, if you do not want good folks like me who are trying our hardest to make a living then, I will just be on my way.</Text>
+				<Text character="Owner">You can take your folks with you.</Text>
+				<Text character="Scotty">Boss, don't get so steamed up. I mean why not draw more people here by allowing folks with wooden nickels?</Text>
+				<Text character="Owner">But we would receive no profit by taking them in.</Text>
+				<Text character="Scotty">I guess you're right, Boss.</Text>
+			</Choice>
+			<Choice choice="What are wooden nickels?" hoursMod="0">
+				<!--We need a way to get this choice to loop back to the other two-->
+				<Text character="None">A wooden nickel is non-valued form of currency that was issued by the banks during the Great Depression.</Text>  
+				<Text character="None">Although it held no monetary value, people could often exchange them for specific items such as drinks.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+
+	<Task id="CALLING AN EMPLOYEE" predecessor="" location="Arch">
+		<Text character="Helga">Boss why must I do the arch?</Text>
+		<Text character="Owner">Everyone has to help draw in the crowd. Today is your turn to draw them in.</Text>
+		<Text character="Helga">People are not worthy to come see me for free. I should be something they have to work for.</Text>
+		<Text character="Owner">Now now, maybe you will get more visitors if you are nice to the customers at the arch.</Text>
+		<Text character="Helga"> I am always nice, it's just no one understands my style of being nice. Stupid people.</Text>
+		<Dialog>
+			<Choice choice="Send Helga" hoursMod="2">
+				<Text character="Owner">Now would you please go manage the Arch?</Text>
+				<Text character="Helga">UGH, FINE.</Text>
+				<Text character="None">Helga storms out</Text>
+			</Choice>
+			<Choice choice="Send Scotty" hoursMod="2">
+				<Text character="Owner">Ok, you don't have to got to the Arch, I guess Scotty can do a double.</Text>
+				<Text character="Helga">That is great.</Text>
+				<Text character="None">Helga heads to her tent</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+
+	<Task id="REPAIR ARCH 1" predecessor="" location="Arch">
+		<Text character="Mary">Daddy, one of the flags from the Arch blew off. It's in the tree now.</Text>
+		<Dialog>
+			<Choice choice="Go fix it" hoursMod="2">
+				<Text character="Owner">Okay, baby girl, I'll go get the ladder.</Text>
+			</Choice>
+			<Choice choice="Call someone to fix it" hoursMod="4">
+				<Text character="Owner">Okay, baby girl</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+
+	<Task id="REPAIR ARCH 2" predecessor="" location="Arch">
+		<Text character="Tessa">Hey Boss, I was just up at the arch and noticed that the balloons aren’t looking so hot.  Maybe they should be replaced.</Text>
+		<Dialog>
+			<Choice choice="Replace balloons" hoursMod="3">
+				<Text character="Owner">All right, I will go get Scotty to replace the deflated balloons.</Text>
+			</Choice>
+			<Choice choice="Leave them how they are" hoursMod="2">
+				<Text character="Owner">Naw, that's ok.  Let's just let them be until tomorrow night.</Text>
+				<Text character="Tessa">Are you sure?  They’re making the arch look messy.</Text>
+				<Text character="Owner">Yeah, it can wait.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+
+	<Task id="CUSTOMER JOB 1" predecessor="" location="Arch">
+		<Text character="Customer 1">Hello sir.</Text>
+		<Text character="Owner">Good day, sir.</Text>
+		<Text character="Customer 1">You wouldn’t happen to  be looking for someone to help out around here, would ya?</Text>
+		<Dialog>
+			<Choice choice="Why yes we are." hoursMod="2">
+				<Text character="Owner">Why yes, we are/ What are you looking to do?</Text>
+				<Text character="Customer 1">Anything!!</Text>
+				<Text character="Owner">Well you look like a strong young man, I’m sure we could use you to help set up and break down the tents.</Text>
+				<Text character="Customer 1">Thank you! Thank you, sir!</Text>
+			</Choice>
+			<Choice choice="No sorry, we aren't." predecessor="" location="Arch">
+				<Text character="Owner">Sorry sir, we have no positions available.</Text>
+				<Text character="Customer 1">Oh. Well, thank you for your time.</Text>
+			</Choice>
+		</Dialog>
+	</Task>
+
+	<!--
+	<Task id="CUSTOMER JOB 2" predecessor="" location="Arch">
+		<!--Waiting to implement this one because it has a female customer. Do we have art for that? Also I guess I will have to specify male or female customer-/->
+	</Task>
+	-->
 </data>

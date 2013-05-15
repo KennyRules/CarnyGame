@@ -33,6 +33,7 @@
 		private var _btnHire:Sprite;
 		private var _hireScreen:HireScreen;
 		private var _task:Task;
+		private var _report:DailyReport;
 		
 		public function Carnival(aTown:Town, aTask:Task) 
 		{
@@ -56,10 +57,11 @@
 			_btnHire = new Sprite();
 			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
 			_btnHire.graphics.beginFill(0x443F35, 1.0);
-			_btnHire.graphics.drawRect(0, 0, 60, 30);
+			_btnHire.graphics.drawRect(0, 0, 55, 30);
 			_btnHire.addChild(new TextField());
 			(_btnHire.getChildAt(0) as TextField).text = "HIRE";
-			(_btnHire.getChildAt(0) as TextField).setTextFormat(new TextFormat(new EdmondsansFont().fontName, 22));
+			(_btnHire.getChildAt(0) as TextField).setTextFormat(new TextFormat(new EdmondsansFont().fontName, 22, 0xE5E5E5));
+			(_btnHire.getChildAt(0) as TextField).selectable = false;
 			addChild(_btnHire);
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
@@ -92,8 +94,12 @@
 		
 		private function onQuadrantSelect(e:MouseEvent):void
 		{
+			if (_hoursLeft <= 0)
+				return;
+				
 			this.gotoAndStop(e.currentTarget.name);
 			_btnHire.alpha = 0;
+			btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
 			
 			for (var i:int = 0; i < quadrants.length; ++i)
 			{
@@ -103,31 +109,28 @@
 				removeGlow(quadrants[i]);
 			}
 				
-			switch (e.currentTarget.name)
+			if (_task.wasTaskCompleted("FROG RIDE") == false)
 			{
-				 case "Rides":
-				 {
-					 btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
-				 	_task.loadXMLSection("FROG RIDE");
+				if (e.currentTarget.name == "Rides")
+				{
+					_task.loadXMLSection("FROG RIDE");
 					_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onSectionComplete);
-				 	break;
-				 }
-				 case "Arch":
-				 {
-					btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
-					_task.loadXMLSection("CALLING ENTERTAINMENT");
+				}
+				else
+				{
+					// Going to empty space.
+					onSectionComplete(new MessageEvent(MessageEvent.ON_SECTION_COMPLETE));
+				}
+			}
+			else
+			{
+				if (_task.chooseNextTask(e.currentTarget.name) == true)
 					_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onSectionComplete);
-					break;
-				 }
+				else
+					onSectionComplete(new MessageEvent(MessageEvent.ON_SECTION_COMPLETE));
 			}
 			
-			_hoursLeft -= Math.random() * 3;
-			if (_hoursLeft <= 0)
-			{
-				// TO-DO: Display "end of day" report, associated logic. For now, just go back to world map.
-				var report:DailyReport = new DailyReport(512, 384, this);
-				addChild(report);
-			}
+			
 			updateInfo();
 		}
 		
@@ -185,12 +188,27 @@
 		
 		private function onSectionComplete(e:MessageEvent):void
 		{
-			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
+			_hoursLeft -= Math.random() * 3;
+			if (_hoursLeft <= 0)
+			{
+				_hoursLeft = 0;
+				// TO-DO: Display "end of day" report, associated logic. For now, just go back to world map.
+				_report = new DailyReport(512, 384, this);
+				addChild(_report);
+			}
+			else
+				btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
 		}
 		
 		private function onTutorialComplete(e:MessageEvent):void
 		{
 			addDefaultEventListeners();
+		}
+		
+		public function endReport():void
+		{
+			removeChild(_report);
+			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
 		}
 		
 		private function clearEvents():void
