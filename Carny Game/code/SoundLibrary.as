@@ -17,11 +17,14 @@ package code {
 	import flash.net.URLLoader;;
 	import flash.events.IOErrorEvent
 	import flash.utils.Dictionary;
+	import flash.media.SoundChannel;
 	
 	
 	public class SoundLibrary {
 
 		private var sounds:Dictionary;
+		private var BG_channel:SoundChannel;
+		private var pausePosition:int;
 
 		public function SoundLibrary() {
 			// constructor code
@@ -35,6 +38,7 @@ package code {
 		{
 			// init sound instance
 			var sound:Sound = new Sound();		// Unqiue sound variable
+			pausePosition = 0;
 			
 			sound.addEventListener(Event.COMPLETE, loadComplete(key));	// triggered on completed load
 			sound.addEventListener(IOErrorEvent.IO_ERROR, onIOError);	// catch errors - #2032 is bad filepath
@@ -49,11 +53,16 @@ package code {
 			localSound.play();
 		}
 		
-		// play a looped sound
-		public function playSound_Loop(key:String, loops:int)
+		// handle background audio in the next two functions
+		public function playBG_sound(key:String, loops:int)
 		{
 			var localSound:Sound = sounds[key] as Sound;
-			localSound.play(0, loops);
+			BG_channel =  localSound.play(pausePosition, loops);
+		}
+		public function stopBG_sound()
+		{
+			pausePosition = BG_channel.position;
+			BG_channel.stop();
 		}
 		
 		// overwrite an old sound with a completed one

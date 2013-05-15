@@ -9,6 +9,7 @@
 	
 	public class HireScreen extends Sprite 
 	{
+		private var _doc:Document;
 		private var _carnival:Carnival;
 		private var _player:Player;
 		private var _potentialEmployees:Array;
@@ -25,6 +26,7 @@
 			_potentialEmployees = new Array();
 			_potentialEmployeesButtons = new Array();
 			initEmployees();
+			_doc = _carnival.getTown.worldMap.GameScreenManager.Doc;
 			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 		}
 		
@@ -77,11 +79,13 @@
 		
 		private function onExitClick(e:MouseEvent):void
 		{
+			_doc.soundLibrary.playSound("click");			// PLAY A SOUND
 			_carnival.hideHireScreen();
 		}
 		
 		private function onEmployeeClick(e:MouseEvent):void
 		{
+			_doc.soundLibrary.playSound("click");			// PLAY A SOUND
 			// TO-DO: Display accept/decline buttons and then add accordingly. For now, just add them and call it a day.
 			var index:uint = _potentialEmployeesButtons.indexOf(e.currentTarget);
 			_player.hireEmployee(_potentialEmployees[index] as Employee);

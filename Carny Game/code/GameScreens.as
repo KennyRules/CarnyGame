@@ -11,6 +11,7 @@
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.getQualifiedClassName;
+	import flash.utils.Dictionary;
 	
 	/**
 	 * ...
@@ -19,6 +20,8 @@
 	public class GameScreens extends MovieClip 
 	{
 		private var theDoc:Document;
+		public function get Doc():Document { return theDoc; }
+		
 		private var worldMap:WorldMap;
 		private var carnival:Carnival;
 		
@@ -37,6 +40,7 @@
 
 		private var _pathRoom:int = 1;
 		private var _task:Task;
+		
 		
 		public function GameScreens(aDoc:Document, aTask:Task) 
 		{

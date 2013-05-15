@@ -15,6 +15,8 @@
 	 */
 	public class Carnival extends MovieClip 
 	{
+		private var _doc:Document;
+		
 		private var town:Town;
 		public function get getTown():Town { return town; }
 		private var quadrants:Array;
@@ -36,7 +38,7 @@
 		private var _report:DailyReport;
 		
 		public function Carnival(aTown:Town, aTask:Task) 
-		{
+		{			
 			this.gotoAndStop("Carnival");
 			town = aTown;
 			_task = aTask;
@@ -64,6 +66,9 @@
 			(_btnHire.getChildAt(0) as TextField).selectable = false;
 			addChild(_btnHire);
 			
+			_doc = town.worldMap.GameScreenManager.Doc;
+			_doc.soundLibrary.playBG_sound("carnival",99);			// PLAY A SOUND
+			
 			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 			updateInfo();
 		}
@@ -82,6 +87,19 @@
 			_btnHire.addEventListener(MouseEvent.CLICK, onHireClick);
 		}
 		
+		private function removeDefaultEventListeners():void
+		{
+			for(var i:int = 0; i < quadrants.lengths; ++i)
+			{
+				quadrants[i].removeEventListener(MouseEvent.CLICK, onQuadrantSelect);
+				quadrants[i].removeEventListener(MouseEvent.MOUSE_OVER, onQuadrantMoveOver);
+				quadrants[i].removeEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
+				removeGlow(quadrants[i]);
+			}
+			btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
+			_btnHire.removeEventListener(MouseEvent.CLICK, onHireClick);
+		}
+		
 		private function onQuadrantMoveOver(e:MouseEvent):void
 		{
 			addGlow(e.currentTarget as MovieClip);
@@ -96,7 +114,9 @@
 		{
 			if (_hoursLeft <= 0)
 				return;
-				
+			
+			_doc.soundLibrary.playSound("click");			// PLAY A SOUND
+			
 			this.gotoAndStop(e.currentTarget.name);
 			_btnHire.alpha = 0;
 			btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
@@ -153,6 +173,7 @@
 		
 		private function onHireClick(e:MouseEvent):void
 		{
+			_doc.soundLibrary.playSound("click");			// PLAY A SOUND
 			_btnHire.removeEventListener(MouseEvent.CLICK, onHireClick);
 			_hireScreen.showScreen();
 		}
@@ -171,11 +192,14 @@
 		
 		private function onBackClick(e:MouseEvent):void
 		{
+			_doc.soundLibrary.playSound("click");			// PLAY A SOUND
+			
 			if (this.currentLabel == "Carnival")
 			{
 				clearEvents();
 				player.getPaid();
 				trace(player.employees.length);
+				_doc.soundLibrary.stopBG_sound();			// STOP THE BG SOUNDS
 				town.worldMap.returnToOverworld();
 			}
 			else

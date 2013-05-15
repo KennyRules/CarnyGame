@@ -8,6 +8,11 @@
 		private var _salary:Number;
 		public function get salary():Number { return _salary; }
 		
+		private var _profit:Number;
+		public function get profit():Number { return _profit; }
+		
+		public function profit_minus_salary():Number { return _profit - _salary; }
+		
 		public function Employee(aName:String, aSalary:Number) 
 		{
 			_employeeName = aName;
@@ -17,7 +22,8 @@
 		public function generateProfit():Number
 		{
 			// TO-DO: Determine how much money an employee makes. Probably need extra parameters and/or using town/carnival.
-			return Math.random() * 200;
+			_profit = Math.random() * 200;
+			return _profit;
 		}
 	}
 }

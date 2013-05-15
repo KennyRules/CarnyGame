@@ -19,6 +19,7 @@
 		private var towns:Array;
 		private var townPopup:TownPopupBox;
 		
+		private var _doc:Document;
 		private var _mapXml:XMLList;
 		private var _currentXML:XMLList;
 		private var _gameTextBox:GameTextBox;
@@ -29,6 +30,7 @@
 		private var _currentIndex:int;
 		private var _currentSection:String;
 		
+		public function get GameScreenManager():GameScreens { return gameScreenManager; }
 		public function get player():Player { return _player; }
 		public function get currentTown():Town { return _currentTown; }
 		public function get daysLeft():int { return _daysLeft; }
@@ -45,6 +47,8 @@
 			
 			initTowns();
 			_daysLeft = MAX_DAYS;
+			
+			_doc = gameScreenManager.Doc;
 			
 			townPopup = new TownPopupBox();
 			
@@ -84,9 +88,11 @@
 		}
 		
 		private function onWorldClick(e:MouseEvent):void
-		{
+		{			
 			if (e.target is Town)
 			{
+				_doc.soundLibrary.playSound("click");			// PLAY A SOUND
+				
 				if (_currentTown)
 				{
 					// TO-DO: Pop-up message detailing travel plans, etc.
@@ -238,7 +244,7 @@
 
 		// Remove the dialog box, continue reading text from the xml tree from the choice selected.
 		private function onDialogSelect(e:MessageEvent):void
-		{
+		{			
 			_gameDialogBox.removeEventListener(MessageEvent.ON_DIALOG_SELECT, onDialogSelect);
 			removeChild(_gameDialogBox);
 

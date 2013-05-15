@@ -18,6 +18,8 @@
 		public function get player():Player { return _player; }
 		
 		private var _soundLib:SoundLibrary;		// Sound Library
+		public function get soundLibrary():SoundLibrary { return _soundLib; }
+		
 		private var introLoader:ForcibleLoader;
 		private var introMC:MovieClip;
 		
@@ -83,8 +85,10 @@
 		private function initSound():void
 		{
 			_soundLib = new SoundLibrary();
-			_soundLib.loadSound("audio/9mmshot.mp3", "gunshot");
-			//_soundLib.playSound("gunshot");
+			_soundLib.loadSound("audio/rope_pull.mp3", "intro");
+			_soundLib.playSound("intro");
+			_soundLib.loadSound("audio/click.mp3", "click");
+			_soundLib.loadSound("audio/carnival_ambient.mp3", "carnival");
 		}
 		
 		private function testTask():void

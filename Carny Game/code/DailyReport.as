@@ -13,6 +13,7 @@
 		private var _carnival:Carnival;
 		private var _player:Player;
 		private var _town:Town;
+		private var _doc:Document;
 		private var _employee_textfields:Array;	// array of the employee text fields
 		private var _firebuttons:Array;			// array of the employee text fields
 		
@@ -31,6 +32,7 @@
 			_town = _carnival.getTown;
 			_employee_textfields = new Array();
 			_firebuttons = new Array();
+			_doc = _town.worldMap.GameScreenManager.Doc;
 			
 			// assign values to the textfield stuff
 			_leftAlign = (this.x - width * 2) + 10;
@@ -68,8 +70,9 @@
 				tf.x = -270;						// set x and y coords
 				tf.y = -150 + (_spaceBetween * i);
 				tf.height = _boxHeight;				// set the textfield height
+				tf.width = 300;
 								
-				tf.text = _player.employees[i].employeeName;	// set the name of the employee
+				tf.text = _player.employees[i].employeeName + "Profit: " + _player.employees[i].profit_minus_salary();	// set the name of the employee
 				addChild(tf);									// add to the scene
 				_employee_textfields.push(tf);					// add to the array
 				
@@ -93,7 +96,7 @@
 			}
 			for(i = 0; i < _player.employees.length + 1; ++i)	// clear the arrays
 			{
-				_firebuttons[i].removeEventListener(MouseEvent.CLICK, onClick(i));
+				//_firebuttons[i].removeEventListener(MouseEvent.CLICK, onClick(i));
 				_employee_textfields.pop();
 				_firebuttons.pop();
 			}
@@ -102,6 +105,7 @@
 		// parameterized eventListener
 		function onClick(i:Number):Function {
 			return function(e:MouseEvent):void {
+				_doc.soundLibrary.playSound("click");
 				// remove the employee
 				_player.employees.splice(i,1);
 				clearArrays();
@@ -111,6 +115,7 @@
 		
 		private function onExitClick(e:MouseEvent):void
 		{
+			_doc.soundLibrary.playSound("click");
 			_carnival.endReport();
 		}
 	}
