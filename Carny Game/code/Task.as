@@ -200,12 +200,14 @@
 			removeChild(_gameTextBox);
 			_characters.gotoAndStop("None");
 			this.addEventListener(MouseEvent.CLICK, onTaskEnd);
+			
+			// Set the completed flag to true.
+			_completedTasks[_currentXML.@id.toString()] = true;
+			dispatchEvent(new MessageEvent(MessageEvent.ON_SECTION_COMPLETE));
 		}
 		
 		private function onTaskEnd(e:MouseEvent):void
 		{
-			// Set the completed flag to true.
-			_completedTasks[_currentXML.@id.toString()] = true;
 			//TODO: add functionality to when what happens after a task
 		}
 		
@@ -231,7 +233,6 @@
 		
 		private function changeCharacter(aCharacter:String):void
 		{
-			trace(aCharacter);
 			_characters.gotoAndStop(aCharacter);
 			_characters.x = stage.stageWidth / 2 - _characters.width / 2;
 			_characters.y = stage.stageHeight - _gameTextBox.height - _characters.height;

@@ -61,6 +61,7 @@
 					//theDoc.clearScreen();
 					changeLocation("World Map");
 					_task.loadXML("TUTORIAL 1");
+					_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onTutorialComplete);
 					break;
 			}
 			if (e.currentTarget is Town)
@@ -79,6 +80,12 @@
 			for (var i:int = 0; i < screens.length; ++i)
 				if (screens[i])
 					removeChild(screens[i]);
+		}
+		
+		private function onTutorialComplete(e:MessageEvent):void
+		{
+			_task.removeEventListener(MessageEvent.ON_SECTION_COMPLETE, onTutorialComplete);
+			worldMap.addEventListeners();
 		}
 		
 		public function changeLocation(newLocation:String):void

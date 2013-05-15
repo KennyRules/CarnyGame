@@ -46,8 +46,24 @@
 			quadrants.push(Entertainment);
 			quadrants.push(Games);
 			
-			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
+			for (var i:int = 0; i < quadrants.length; ++i)
+			{
+				removeGlow(quadrants[i]);
+			}
 			
+			_btnHire = new Sprite();
+			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
+			_btnHire.graphics.beginFill(0xFF0000, 1.0);
+			_btnHire.graphics.drawRect(0, 0, 50, 50);
+			
+			addChild(_btnHire);
+			
+			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
+			updateInfo();
+		}
+		
+		private function addDefaultEventListeners():void
+		{
 			for (var i:int = 0; i < quadrants.length; ++i)
 			{
 				quadrants[i].addEventListener(MouseEvent.CLICK, onQuadrantSelect);
@@ -55,16 +71,9 @@
 				quadrants[i].addEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
 				removeGlow(quadrants[i]);
 			}
-				
-			_btnHire = new Sprite();
-			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
-			_btnHire.graphics.beginFill(0xFF0000, 1.0);
-			_btnHire.graphics.drawRect(0, 0, 50, 50);
-			_btnHire.addEventListener(MouseEvent.CLICK, onHireClick);
-			addChild(_btnHire);
 			
-			this.addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
-			updateInfo();
+			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
+			_btnHire.addEventListener(MouseEvent.CLICK, onHireClick);
 		}
 		
 		private function onQuadrantMoveOver(e:MouseEvent):void
@@ -80,6 +89,7 @@
 		private function onQuadrantSelect(e:MouseEvent):void
 		{
 			this.gotoAndStop(e.currentTarget.name);
+			_btnHire.alpha = 0;
 			
 			for (var i:int = 0; i < quadrants.length; ++i)
 			{
@@ -93,7 +103,9 @@
 			{
 				 case "Rides":
 				 {
+					 btnBack.removeEventListener(MouseEvent.CLICK, onBackClick);
 				 	_task.loadXML("FROG RIDE");
+					_task.addEventListener(MessageEvent.ON_SECTION_COMPLETE, onSectionComplete);
 				 	break;
 				 }
 			}
@@ -117,7 +129,13 @@
 			_hireScreen.visible = false;
 			
 			if (!_task.wasTaskCompleted("TUTORIAL 2"))
+			{
 				_task.loadXML("TUTORIAL 2");
+			}
+			else
+			{
+				addDefaultEventListeners();
+			}
 		}
 		
 		private function onHireClick(e:MouseEvent):void
@@ -150,16 +168,14 @@
 			else
 			{
 				this.gotoAndStop("Carnival");
-				
-				for (var i:int = 0; i < quadrants.length; ++i)
-				{
-					quadrants[i].alpha = 1;
-					removeGlow(quadrants[i]);
-					quadrants[i].addEventListener(MouseEvent.CLICK, onQuadrantSelect);
-					quadrants[i].addEventListener(MouseEvent.MOUSE_OVER, onQuadrantMoveOver);
-					quadrants[i].addEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
-				}
+				addDefaultEventListeners();
+				_btnHire.alpha = 1;
 			}
+		}
+		
+		private function onSectionComplete(e:MessageEvent):void
+		{
+			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
 		}
 		
 		private function clearEvents():void

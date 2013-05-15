@@ -47,15 +47,19 @@
 			_daysLeft = MAX_DAYS;
 			
 			townPopup = new TownPopupBox();
-			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
+			
 			addChild(townPopup);
 			townPopup.visible = false;
 			updateInfo();
 			
-			this.addEventListener(MouseEvent.CLICK, onWorldClick);
-			
 			//var textUrlLoader:URLLoader = new URLLoader(new URLRequest("WorldMapText.xml"));
 			//textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
+		}
+		
+		public function addEventListeners():void
+		{
+			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
+			this.addEventListener(MouseEvent.CLICK, onWorldClick);
 		}
 		
 		private function onTextLoadComplete(e:Event):void
@@ -315,8 +319,8 @@
 			
 			aTown = new Town(this, "Kansas Top", Math.random() * 100 + 1, Math.random() * 100000 + 1, Math.random() * 101);
 			aTown.x = 214;
-			aTown.y = 380
-			;
+			aTown.y = 380;
+			
 			addChild(aTown);
 			towns.push(aTown);
 

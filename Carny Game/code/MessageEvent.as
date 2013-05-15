@@ -1,4 +1,4 @@
-package code 
+﻿package code 
 {
 	import flash.events.Event;
 	
@@ -9,6 +9,7 @@ package code
 	public class MessageEvent extends Event 
 	{
 		public static const ON_MESSAGE_COMPLETE:String = "onMessageComplete";
+		public static const ON_SECTION_COMPLETE:String = "onMessageComplete";
 		public static const ON_DIALOG_SELECT:String = "OnDialogSelect";
 		
 		public var dialogSelected:int = 0;
