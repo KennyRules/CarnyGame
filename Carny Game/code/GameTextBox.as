@@ -8,6 +8,7 @@
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.utils.Timer;
+	import flash.filters.GlowFilter;
 	
 	/**
 	 * ...
@@ -16,7 +17,7 @@
 	public class GameTextBox extends Sprite 
 	{
 		private var _textSpeed:Number = 0; // How fast a character displays, in milliseconds. 0 = instant.
-		private var _textField:TextField;
+		public var _textField:TextField;
 		private var _textFormat:TextFormat = new TextFormat(new EdmondsansFont().fontName, 20, 0x000000, null, null, null, null, null, null, null, null, null, 5); // Font, Size, color, leading are set.
 		private var _textFieldTimer:Timer;
 		private var _textHeight:int = 0;
@@ -52,7 +53,7 @@
 			
 			_textField.width = stage.stageWidth;
 			_textField.x = 0;	
-			_textField.y = stage.stageHeight - _textField.height;
+			_textField.y = stage.stageHeight - _textField.height * 2;
 			_textHeight = _textField.textHeight;
 			_textField.border = true;
 			_textField.multiline = true;
@@ -117,15 +118,41 @@
 		{
 			_nextButton = new NextButton();
 			addChild(_nextButton);
-			
+			_nextButton.addEventListener(MouseEvent.MOUSE_OVER, onNextHoverOn);
+			_nextButton.addEventListener(MouseEvent.MOUSE_OUT, onNextHoverOff);
 			
 			_nextButton.x = stage.stageWidth - _nextButton.width;
-			_nextButton.y = stage.stageHeight - _textField.height - _nextButton.height;
+			_nextButton.y = _textField.y + _textField.height;
 		}
 		
 		private function onMouseClick(e:MouseEvent):void
 		{
 			dispatchEvent(new MessageEvent(MessageEvent.ON_MESSAGE_COMPLETE));
+		}
+		
+		private function onNextHoverOn(e:MouseEvent):void
+		{
+			addGlow(e.currentTarget as Sprite);
+		}
+		
+		private function onNextHoverOff(e:MouseEvent):void
+		{
+			removeGlow(e.currentTarget as Sprite);
+		}
+		
+		private function addGlow(aMC:Sprite):void
+		{
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0xffff00;
+			glow.alpha = 1;
+			glow.blurX = 25;
+			glow.blurY = 25;
+			aMC.filters = [glow];
+		}
+		
+		private function removeGlow(aMC:Sprite):void
+		{
+			aMC.filters = [];
 		}
 	}
 }

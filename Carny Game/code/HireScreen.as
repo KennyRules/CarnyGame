@@ -3,6 +3,7 @@
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.Font;
 	import flash.text.TextFormat;
@@ -59,7 +60,7 @@
 				var aButton:Sprite = new Sprite();
 				aButton.x = stage.stageWidth / 4;
 				aButton.y = i * 200 + 150;
-				aButton.graphics.beginFill(0x00FF00, 1.0);
+				aButton.graphics.beginFill(0x181A15, 1.0);
 				aButton.graphics.drawRect(0, 0, stage.stageWidth / 2, 100);
 				
 				// Set the text - Needs better formatting later.
@@ -68,9 +69,11 @@
 				aTextField.text = "Name: " + _potentialEmployees[i].employeeName + ", Salary: " + _potentialEmployees[i].salary.toString();
 				
 				var aFont = new EdmondsansFont().fontName;
-				aTextField.setTextFormat(new TextFormat(aFont, 20));
+				aTextField.setTextFormat(new TextFormat(aFont, 20, 0xE5E5E5));
+				aTextField.selectable = false;
 				aButton.addChild(aTextField);
-				
+				aButton.addEventListener(MouseEvent.MOUSE_OVER, onHireMoveOver);
+				aButton.addEventListener(MouseEvent.MOUSE_OUT, onHireMoveOff);
 				addChild(aButton);
 				_potentialEmployeesButtons.push(aButton);
 				aButton.addEventListener(MouseEvent.CLICK, onEmployeeClick);
@@ -97,6 +100,8 @@
 			{
 				var aButton:Sprite = _potentialEmployeesButtons.pop();
 				aButton.removeEventListener(MouseEvent.CLICK, onEmployeeClick);
+				aButton.removeEventListener(MouseEvent.MOUSE_OVER, onHireMoveOver);
+				aButton.removeEventListener(MouseEvent.MOUSE_OUT, onHireMoveOff);
 				removeChild(aButton);
 			}
 		}
@@ -111,6 +116,31 @@
 		{
 			_exitButton.removeEventListener(MouseEvent.CLICK, onExitClick);
 			this.visible = false;
+		}
+		
+		private function onHireMoveOver(e:MouseEvent):void
+		{
+			addGlow(e.currentTarget as Sprite);
+		}
+		
+		private function onHireMoveOff(e:MouseEvent):void
+		{
+			removeGlow(e.currentTarget as Sprite);
+		}
+		
+		private function addGlow(aMC:Sprite):void
+		{
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0xffff00;
+			glow.alpha = 1;
+			glow.blurX = 25;
+			glow.blurY = 25;
+			aMC.filters = [glow];
+		}
+		
+		private function removeGlow(aMC:Sprite):void
+		{
+			aMC.filters = [];
 		}
 	}
 }

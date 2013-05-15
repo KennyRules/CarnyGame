@@ -59,7 +59,7 @@
 			_btnHire = new Sprite();
 			_btnHire.x = aTown.worldMap.stage.stageWidth / 2;
 			_btnHire.graphics.beginFill(0x443F35, 1.0);
-			_btnHire.graphics.drawRect(0, 0, 55, 30);
+			_btnHire.graphics.drawRect(0, 0, 57, 30);
 			_btnHire.addChild(new TextField());
 			(_btnHire.getChildAt(0) as TextField).text = "HIRE";
 			(_btnHire.getChildAt(0) as TextField).setTextFormat(new TextFormat(new EdmondsansFont().fontName, 22, 0xE5E5E5));
@@ -75,16 +75,28 @@
 		
 		private function addDefaultEventListeners():void
 		{
-			for (var i:int = 0; i < quadrants.length; ++i)
+			if (_task.wasTaskCompleted("FROG RIDE") == false)
 			{
-				quadrants[i].addEventListener(MouseEvent.CLICK, onQuadrantSelect);
-				quadrants[i].addEventListener(MouseEvent.MOUSE_OVER, onQuadrantMoveOver);
-				quadrants[i].addEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
-				removeGlow(quadrants[i]);
+				addGlow(Rides);
+				Rides.addEventListener(MouseEvent.CLICK, onQuadrantSelect);
+				Rides.addEventListener(MouseEvent.MOUSE_OVER, onQuadrantMoveOver);
+				Rides.addEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
+			}
+			else
+			{
+				for (var i:int = 0; i < quadrants.length; ++i)
+				{
+					quadrants[i].addEventListener(MouseEvent.CLICK, onQuadrantSelect);
+					quadrants[i].addEventListener(MouseEvent.MOUSE_OVER, onQuadrantMoveOver);
+					quadrants[i].addEventListener(MouseEvent.MOUSE_OUT, onQuadrantMoveOff);
+					removeGlow(quadrants[i]);
+				}
 			}
 			
 			btnBack.addEventListener(MouseEvent.CLICK, onBackClick);
 			_btnHire.addEventListener(MouseEvent.CLICK, onHireClick);
+			
+			
 		}
 		
 		private function removeDefaultEventListeners():void
@@ -214,6 +226,7 @@
 			_hoursLeft -= Math.random() * 3;
 			if (_hoursLeft <= 0)
 			{
+				this.gotoAndStop("Carnival");
 				_hoursLeft = 0;
 				// TO-DO: Display "end of day" report, associated logic. For now, just go back to world map.
 				_report = new DailyReport(512, 384, this);

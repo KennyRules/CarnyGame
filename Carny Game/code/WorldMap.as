@@ -1,8 +1,10 @@
 ﻿package code 
 {
+	import flash.display.Sprite;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
+	import flash.filters.GlowFilter;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
@@ -46,6 +48,7 @@
 			_currentXML = null;
 			
 			initTowns();
+		
 			_daysLeft = MAX_DAYS;
 			
 			_doc = gameScreenManager.Doc;
@@ -60,10 +63,25 @@
 			//textUrlLoader.addEventListener(Event.COMPLETE, onTextLoadComplete);
 		}
 		
+		private function onTownMoveOver(e:MouseEvent):void
+		{
+			addGlow(e.currentTarget as MovieClip);
+		}
+		
+		private function onTownMoveOff(e:MouseEvent):void
+		{
+			removeGlow(e.currentTarget as MovieClip);
+		}
+		
 		public function addEventListeners():void
 		{
 			townPopup.btnTravel.addEventListener(MouseEvent.CLICK, onTravelClick);
 			this.addEventListener(MouseEvent.CLICK, onWorldClick);
+			for (var i:uint = 0; i < towns.length; ++i)
+			{
+				towns[i].addEventListener(MouseEvent.MOUSE_OVER, onTownMoveOver);
+				towns[i].addEventListener(MouseEvent.MOUSE_OUT, onTownMoveOff);
+			}
 		}
 		
 		private function onTextLoadComplete(e:Event):void
@@ -80,10 +98,16 @@
 			{
 				updateInfo();
 				gameScreenManager.changeLocation("World Map");
+				
+				for (var i:uint = 0; i < towns.length; ++i)
+				{
+					towns[i].addEventListener(MouseEvent.MOUSE_OVER, onTownMoveOver);
+					towns[i].addEventListener(MouseEvent.MOUSE_OUT, onTownMoveOff);
+				}
 			}
 			else
 			{
-				// TO-DO: Handle the end of game, evaluation, etc.
+				gameScreenManager.changeLocation("End");
 			}
 		}
 		
@@ -225,6 +249,12 @@
 			_gameTextBox.removeEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 			removeChild(_gameTextBox);
 			this.addEventListener(MouseEvent.CLICK, onWorldClick);
+			
+			for (var i:uint = 0; i < towns.length; ++i)
+			{
+				towns[i].addEventListener(MouseEvent.MOUSE_OVER, onTownMoveOver);
+				towns[i].addEventListener(MouseEvent.MOUSE_OUT, onTownMoveOff);
+			}
 		}
 
 		private function addDialogBox():void
@@ -329,9 +359,21 @@
 			
 			addChild(aTown);
 			towns.push(aTown);
-
-			
-			
+		}
+		
+		private function addGlow(aMC:MovieClip):void
+		{
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0xffff00;
+			glow.alpha = 1;
+			glow.blurX = 25;
+			glow.blurY = 25;
+			aMC.filters = [glow];
+		}
+		
+		private function removeGlow(aMC:MovieClip):void
+		{
+			aMC.filters = [];
 		}
 	}
 }

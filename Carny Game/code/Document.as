@@ -36,9 +36,9 @@
 			var url:URLRequest = new URLRequest("IntroAnimation.swf"); 
 			
 			// Comment out these two lines, and uncomment the third line to just go straight to start screen.
-			introLoader.load(url);   
-			introLoader.loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onIntroLoadComplete);
-			//startGame();
+			//introLoader.load(url);   
+			//introLoader.loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onIntroLoadComplete);
+			startGame();
 		}
 		
 		private function onIntroLoadComplete(e:Event):void 

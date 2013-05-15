@@ -81,7 +81,9 @@
 			_currentXML = _taskDictionary[id];
 			if (_currentXML != null)
 			{
-				_gameTextBox = new GameTextBox(_currentXML.Text[_currentIndex]);
+				var aCharacter:String = (_currentXML.children()[_currentIndex].@character.toString() == "None") ? "" : _currentXML.children()[_currentIndex].@character.toString() + ": ";
+			
+				_gameTextBox = new GameTextBox(aCharacter + _currentXML.Text[_currentIndex]);
 				
 				addChild(_gameTextBox);
 					
@@ -110,8 +112,10 @@
 				var nodeName:String = _currentXML.child(_currentIndex).name();
 				if (nodeName == "Text")
 				{
+					var aCharacter:String = (_currentXML.children()[_currentIndex].@character.toString() == "None") ? "" : _currentXML.children()[_currentIndex].@character.toString() + ": ";
 					changeCharacter(_currentXML.children()[_currentIndex].@character.toString());
-					_gameTextBox.loadMessage(_currentXML.children()[_currentIndex]);
+					
+					_gameTextBox.loadMessage(aCharacter + _currentXML.children()[_currentIndex]);
 				}
 				// If it is a Dialog node, make this node the new current node to generate messages from.
 				else if (nodeName == "Dialog")
@@ -189,7 +193,11 @@
 			
 			_currentIndex = 0;
 			_currentXML = XMLList(_currentXML[e.dialogSelected]);
-			_gameTextBox.loadMessage(_currentXML.Text[_currentIndex]);
+			
+			var aCharacter:String = (_currentXML.children()[_currentIndex].@character.toString() == "None") ? "" : _currentXML.children()[_currentIndex].@character.toString() + ": ";
+			changeCharacter(_currentXML.children()[_currentIndex].@character.toString());
+			_gameTextBox.loadMessage(aCharacter + _currentXML.Text[_currentIndex]);
+			
 			changeCharacter(_currentXML.children()[_currentIndex].@character.toString());
 			_gameTextBox.addEventListener(MessageEvent.ON_MESSAGE_COMPLETE, onMessageComplete);
 		}
@@ -235,7 +243,8 @@
 		{
 			_characters.gotoAndStop(aCharacter);
 			_characters.x = stage.stageWidth / 2 - _characters.width / 2;
-			_characters.y = stage.stageHeight - _gameTextBox.height - _characters.height;
+			_characters.y = _gameTextBox._textField.y - _characters.height;
+			//_characters.y = stage.stageHeight - _gameTextBox.height - _characters.height;
 		}
 		
 		public function chooseNextTask(aSection:String):Boolean
